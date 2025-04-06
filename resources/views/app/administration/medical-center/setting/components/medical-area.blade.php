@@ -3,37 +3,32 @@
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                 <th>ID</th>
-                <th>Menú</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Asignado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
-            @if (isset($permissions) && $permissions->count() > 0)
-                <form id="permissions" action="{{ route('role.permission.sync') }}", method="POST">
+            @if (isset($areas) && $areas->count() > 0)
+                <form id="form_area" action="{{ route('medical.center.setting.areas') }}" method="post">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="role_id" value="{{ $role->id }}">
-                    @foreach ($permissions as $row)
+                    <input type="hidden" name="medical_center_id" value="{{ $center->id }}">
+                    @foreach ($areas as $row)
                         <tr>
                             <td>
                                 <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                             </td>
                             <td>
-                                <span class="text-gray-900 fw-bold">{{ Str::upper($row->menu->name) }} </span>
+                                <span class="text-gray-900 fw-bold">{{ ucwords($row->name) }} </span>
                             </td>
                             <td>
-                                <span class="text-gray-900 fw-bold">{{ Str::upper($row->display_name) }} </span>
-                            </td>
-                            <td>
-                                <span class="text-gray-900">{{ $row->description }} </span>
+                                <span class="text-gray-900 fw-bold">{{ $row->description }} </span>
                             </td>
                             <td>
                                 <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox"
-                                        name="permissions[]" value="{{ $row->id }}"
-                                        @if ($role->permissions->contains($row->id)) checked @endif>
+                                    <input class="form-check-input" type="checkbox" name="areas[]"
+                                        value="{{ $row->id }}" @if ($center->medicalAreas->contains($row->id)) checked @endif>
                                 </label>
                             </td>
                         </tr>
@@ -44,7 +39,6 @@
     </table>
 
     <div class="card-body text-center">
-        <button type="submit" form="permissions"
-            class="btn btn-md btn-primary btn-active-light-primary">Guardar</button>
+        <button type="submit" form="form_area" class="btn btn-md btn-primary btn-active-light-primary">Guardar</button>
     </div>
 </div>

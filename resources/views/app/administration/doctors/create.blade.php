@@ -51,7 +51,7 @@
                     <div class="row mb-5">
                         <div class="col-md-6 fv-row">
                             <label for="document" class="form-label required fs-5 fw-semibold mb-2">Cédula</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="V123456789"
+                            <input type="text" class="form-control form-control-solid" placeholder="123456789"
                                 name="document" />
                         </div>
 

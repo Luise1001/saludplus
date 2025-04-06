@@ -82,7 +82,7 @@ class RoleController extends Controller
         ]);
     }
 
-    public function permissionAsync(Request $request)
+    public function PermissionAssign(Request $request)
     {
         $request->validate([
             'role_id' => 'required|integer|exists:roles,id',
@@ -98,14 +98,7 @@ class RoleController extends Controller
             'permissions.*.exists' => 'Uno o más permisos no existen.',
         ]);
 
-        RolePermission::where('role_id', $request->role_id)->delete();
-        
-        foreach ($request->permissions as $permission) {
-            RolePermission::create([
-                'role_id' => $request->role_id,
-                'permission_id' => $permission
-            ]);
-        }
+        Role::find($request->role_id)->permissions()->sync($request->permissions);
 
         return redirect()->back()->withSuccess('Permisos asignados correctamente.');
     }

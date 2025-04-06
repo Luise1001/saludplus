@@ -78,4 +78,5 @@ class MedicalCenterController extends Controller
 
     return redirect()->route('medical.center.index')->withSuccess('Centro médico editado con éxito.');
   }
+  
 }

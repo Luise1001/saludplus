@@ -49,13 +49,26 @@
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
                         <td class="text-end">
-                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                <a href="{{ route('medical.center.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
-                                    <i class="ki-duotone ki-pencil fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                </a>
+                            <div class="d-flex justify-content-end">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                    <a href="{{ route('medical.center.edit', ['id' => $row->id]) }}"
+                                        class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                        <i class="ki-duotone ki-pencil fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                    </a>
+                                </div>
+
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Configuración">
+                                    <a href="{{ route('medical.center.setting.index', ['id' => $row->id]) }}"
+                                        class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                        <i class="ki-duotone ki-setting-2 fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                    </a>
+                                </div>
                             </div>
                         </td>
                     </tr>

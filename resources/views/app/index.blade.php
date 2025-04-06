@@ -1,15 +1,15 @@
 @extends('app.layouts.index')
 
 @section('styles')
-<style>
-    body {
-        background-image: url({{ asset('assets/media/auth/bg10.jpeg') }});
-    }
+    <style>
+        body {
+            background-image: url({{ asset('assets/media/auth/bg10.jpeg') }});
+        }
 
-    [data-bs-theme="dark"] body {
-        background-image: url({{ asset('assets/media/auth/bg10-dark.jpeg') }});
-    }
-</style>
+        [data-bs-theme="dark"] body {
+            background-image: url({{ asset('assets/media/auth/bg10-dark.jpeg') }});
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -34,13 +34,15 @@
                 </div>
             </div>
 
-            <div class="shadow-md d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
+            <div
+                class="shadow-md d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
                 <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
+                        @include('app.layouts.components.alerts')
 
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
-                            <form action="{{ route('reservation.index') }}" method="GET" class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
-                                data-kt-redirect-url="index.html">
+                            <form action="{{ route('patient.register') }}" method="GET" class="form w-100"
+                                novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html">
                                 @csrf
                                 <div class="text-center mb-11">
                                     <h1 class="text-gray-900 fw-bolder mb-3">Salud Plus</h1>
@@ -49,7 +51,7 @@
 
                                 <div class="fv-row mb-8">
                                     <label for="document" class="required fw-bold">Cédula</label>
-                                    <input type="text" placeholder="V123456789" name="document" autocomplete="off"
+                                    <input type="text" placeholder="123456789" name="document" autocomplete="off"
                                         class="form-control bg-transparent" />
                                 </div>
 

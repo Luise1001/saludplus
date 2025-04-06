@@ -27,8 +27,7 @@ class DoctorRequest extends FormRequest
             'last_name' => 'required|string|max:255',
             'document' => [
                 'required',
-                'string',
-                'max:255',
+                'numeric',
                 Rule::unique('doctors', 'document')->ignore($this->id),
             ],
             'phone' => 'required|string|max:255',
@@ -47,6 +46,8 @@ class DoctorRequest extends FormRequest
             'last_name.required' => 'El apellido es obligatorio.',
             'document.required' => 'El documento es obligatorio.',
             'document.unique' => 'El documento ya está en uso.',
+            'document.numeric' => 'El documento solo puede contener números.',
+            'document.max' => 'El documento no puede tener más de 255 caracteres.',
             'phone.required' => 'El teléfono es obligatorio.',
             'address.required' => 'La dirección es obligatoria.',
             'medical_area_id.required' => 'El área de atención es obligatoria.',

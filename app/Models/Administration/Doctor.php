@@ -5,6 +5,7 @@ namespace App\Models\Administration;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Administration\MedicalArea;
+use App\Models\Administration\MedicalCenter;
 
 class Doctor extends Model
 {
@@ -23,5 +24,10 @@ class Doctor extends Model
     public function medicalArea()
     {
         return $this->belongsTo(MedicalArea::class, 'medical_area_id');
+    }
+
+    public function medicalCenters()
+    {
+        return $this->belongsToMany(MedicalCenter::class, 'medical_center_doctors');
     }
 }

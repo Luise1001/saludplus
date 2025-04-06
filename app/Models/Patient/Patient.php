@@ -1,33 +1,43 @@
 <?php
 
-namespace App\Models\Administration;
+namespace App\Models\Patient;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use App\Models\State;
 use App\Models\Municipality;
 use App\Models\Parish;
-use App\Models\Administration\MedicalArea;
-use App\Models\Administration\Doctor;
 
-class MedicalCenter extends Model
+class Patient extends Model
 {
     use HasFactory;
-    protected $table = 'medical_centers';
+
+    protected $table = 'patients';
     protected $fillable = [
+        'user_id',
         'name',
-        'short_name',
+        'last_name',
         'document',
-        'active',
+        'birth_date',
+        'email',
+        'phone',
+        'age',
         'state_id',
         'municipality_id',
-        'parish_id'
+        'parish_id',
+        'sector'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function state()
     {
         return $this->belongsTo(State::class);
-    }   
+    }
 
     public function municipality()
     {
@@ -38,15 +48,4 @@ class MedicalCenter extends Model
     {
         return $this->belongsTo(Parish::class);
     }
-
-    public function medicalAreas()
-    {
-        return $this->belongsToMany(MedicalArea::class, 'medical_center_areas');
-    }
-
-    public function doctors()
-    {
-        return $this->belongsToMany(Doctor::class, 'medical_center_doctors');
-    }
-
 }

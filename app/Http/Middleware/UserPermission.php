@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RolePermission;
+use App\Models\Role;
 use App\Models\Permission;
 
 class UserPermission
@@ -20,9 +22,8 @@ class UserPermission
         session()->forget('user_permissions');
 
         if (Auth::user()) {
-            $permissions = Permission::with(['roles' =>function ($query) {
-                $query->where('role_id', Auth::user()->role->id);
-            }])->with('menu')->get()->groupBy('menu_id');
+            $role = Role::with('permissions')->where('id', Auth::user()->role->id)->first();
+            $permissions = $role->permissions->groupBy('menu_id');
 
             session(['user_permissions' => $permissions]);
         } else {

@@ -9,8 +9,10 @@ use App\Http\Controllers\Web\App\PatientController;
 use App\Http\Controllers\Web\App\ReservationController;
 use App\Http\Controllers\Web\App\ProfileController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterController;
+use App\Http\Controllers\Web\App\Administration\MedicalCenterSettingController;
 use App\Http\Controllers\Web\App\Administration\MedicalAreaController;
 use App\Http\Controllers\Web\App\Administration\DoctorController;
+use App\Http\Controllers\Web\App\Administration\MedicalScheduleController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -20,8 +22,8 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/', [MainController::class, 'index'])->name('app.index');
 
 Route::middleware(['permissions'])->group(function () {
-    Route::get('/registro', [PatientController::class, 'index'])->name('patient.index');
-    Route::post('/registro', [PatientController::class, 'register'])->name('patient.register');
+    Route::get('/registro-de-pacientes', [PatientController::class, 'index'])->name('patient.index');
+    Route::post('/registro-de-pacientes', [PatientController::class, 'register'])->name('patient.register');
 
     Route::get('/agendar-cita', [ReservationController::class, 'index'])->name('reservation.index');
     Route::post('/agendar-cita', [ReservationController::class, 'reserve'])->name('reservation.reserve');
@@ -47,7 +49,7 @@ Route::middleware([
     Route::put('/roles/editar', [RoleController::class, 'update'])->name('role.update');
     Route::get('/roles/editar/id={id}', [RoleController::class, 'edit'])->name('role.edit');
     Route::get('/roles/permisos/rol/id={id}', [RoleController::class, 'detail'])->name('role.detail');
-    Route::put('/roles/role/asignar-permisos', [RoleController::class, 'permissionAsync'])->name('role.permission.async');
+    Route::put('/roles/role/asignar-permisos', [RoleController::class, 'PermissionAssign'])->name('role.permission.sync');
 
     /**
      * Permissions
@@ -68,6 +70,13 @@ Route::middleware([
     Route::get('/centros-medicos/editar/id={id}', [MedicalCenterController::class, 'edit'])->name('medical.center.edit');
 
     /**
+     * Medical Center Settings
+     */
+    Route::get('/centros-medicos/configuracion/id={id}', [MedicalCenterSettingController::class, 'index'])->name('medical.center.setting.index');
+    Route::put('/centros-medicos/configuracion/areas', [MedicalCenterSettingController::class, 'areas'])->name('medical.center.setting.areas');
+    Route::put('/centros-medicos/configuracion/especialistas', [MedicalCenterSettingController::class, 'doctors'])->name('medical.center.setting.doctors');
+
+    /**
      * Medical Áreas
      */
     Route::get('/areas-de-atencion', [MedicalAreaController::class, 'index'])->name('medical.area.index');
@@ -84,6 +93,15 @@ Route::middleware([
     Route::post('/especialitas/crear', [DoctorController::class, 'store'])->name('doctor.store');
     Route::put('/especialitas/editar', [DoctorController::class, 'update'])->name('doctor.update');
     Route::get('/especialitas/editar/id={id}', [DoctorController::class, 'edit'])->name('doctor.edit');
+
+    /**
+     * Medical Schedule
+     */
+    Route::get('/horarios', [MedicalScheduleController::class, 'index'])->name('medical.schedule.index');
+    Route::get('/horarios/crear', [MedicalScheduleController::class, 'create'])->name('medical.schedule.create');
+    Route::post('/horarios/crear', [MedicalScheduleController::class, 'store'])->name('medical.schedule.store');
+    Route::put('/horarios/editar', [MedicalScheduleController::class, 'update'])->name('medical.schedule.update');
+    Route::get('/horarios/editar/id={id}', [MedicalScheduleController::class, 'edit'])->name('medical.schedule.edit');
 
     /**
      * Users
