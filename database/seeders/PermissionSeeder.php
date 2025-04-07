@@ -69,6 +69,15 @@ class PermissionSeeder extends Seeder
                 'active' => true,
                 'level' => 1,
             ],
+            [
+                'menu_id' => 1,
+                'route' => 'center.reservation.index',
+                'name' => 'center.reservation.manage',
+                'display_name' => 'Citas',
+                'description' => 'Gestionar las citas médicas del sistema',
+                'active' => true,
+                'level' => 1,
+            ],
         ];
 
         $permissionIds = [];

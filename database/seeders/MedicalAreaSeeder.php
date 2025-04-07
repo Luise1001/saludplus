@@ -70,7 +70,7 @@ class MedicalAreaSeeder extends Seeder
             MedicalArea::create([
                 'name' => $area,
                 'description' => 'Área de atención especializada en ' . strtolower($area),
-                'active' => false,
+                'active' => true,
             ]);
         }
     }
