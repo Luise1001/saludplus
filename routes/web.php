@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\App\Administration\MedicalCenterSettingController;
 use App\Http\Controllers\Web\App\Administration\MedicalAreaController;
 use App\Http\Controllers\Web\App\Administration\DoctorController;
 use App\Http\Controllers\Web\App\Administration\MedicalScheduleController;
+use App\Http\Controllers\Web\App\Administration\CenterReservationController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -102,6 +103,11 @@ Route::middleware([
     Route::post('/horarios/crear', [MedicalScheduleController::class, 'store'])->name('medical.schedule.store');
     Route::put('/horarios/editar', [MedicalScheduleController::class, 'update'])->name('medical.schedule.update');
     Route::get('/horarios/editar/id={id}', [MedicalScheduleController::class, 'edit'])->name('medical.schedule.edit');
+
+    /**
+     * Center Reservation
+     */
+    Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
 
     /**
      * Users
