@@ -53,8 +53,8 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'menu_id' => 1,
-                'route' => 'docttor.index',
-                'name' => 'docttor.manage',
+                'route' => 'doctor.index',
+                'name' => 'doctor.manage',
                 'display_name' => 'Especialistas',
                 'description' => 'Gestionar los especialistas del sistema',
                 'active' => true,
