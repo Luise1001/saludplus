@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\Database\Seeders\MenuSeeder::class);
         $this->call(\Database\Seeders\PermissionSeeder::class);
         $this->call(\Database\Seeders\LocationSeeder::class);
+        $this->call(\Database\Seeders\MedicalAreaSeeder::class);
+        $this->call(\Database\Seeders\MedicalCenterSeeder::class);
     }
 }

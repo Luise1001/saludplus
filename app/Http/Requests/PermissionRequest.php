@@ -22,6 +22,9 @@ class PermissionRequest extends FormRequest
      */
     public function rules(): array
     {
+        $active = $this->active ? 1 : 0;
+        $this->merge(['active' => $active]);
+        
         return [
             'name' => [
                 'required',
@@ -34,6 +37,7 @@ class PermissionRequest extends FormRequest
             'active' => 'nullable|boolean',
             'menu_id' => 'required|integer|exists:menu,id',
             'route' => 'required|string|max:255',
+            'level' =>  'required|integer',
         ];
     }
 
@@ -57,14 +61,11 @@ class PermissionRequest extends FormRequest
             'menu_id.required' => 'El menú es obligatorio.',
             'menu_id.integer' => 'El menú debe ser un número entero.',
             'menu_id.exists' => 'El menú seleccionado no es válido.',
-            'icon.required' => 'El icono es obligatorio.',
-            'icon.string' => 'El icono debe ser una cadena de texto.',
-            'icon.max' => 'El icono no puede tener más de 255 caracteres.',
-            'icon_items.required' => 'La cantidad de items por icono es obligatoria.',
-            'icon_items.integer' => 'La cantidad de items por icono debe ser un número entero.',
             'route.required' => 'La ruta es obligatoria.',
             'route.string' => 'La ruta debe ser una cadena de texto.',
             'route.max' => 'La ruta no puede tener más de 255 caracteres.',
+            'level.required' => 'El nivel es obligatorio.',
+            'level.integer' => 'El nivel debe ser un número entero.',
         ];
     }
 }

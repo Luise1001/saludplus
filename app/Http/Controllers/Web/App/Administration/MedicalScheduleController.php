@@ -6,20 +6,12 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\Administration\ScheduleRequest;
-use App\Services\Schedule\ScheduleService;
 use App\Models\Administration\MedicalSchedule;
 use App\Models\Administration\MedicalCenter;
 use App\Models\Administration\MedicalArea;
 
 class MedicalScheduleController extends Controller
 {
-    protected $scheduleService;
-
-    public function __construct(ScheduleService $scheduleService)
-    {
-        $this->scheduleService = $scheduleService;
-    }
-
     public function index()
     {
         $schedules = MedicalSchedule::with(['medicalCenter', 'medicalArea'])->get();
@@ -31,8 +23,8 @@ class MedicalScheduleController extends Controller
 
     public function create()
     {
-        $hours = $this->scheduleService->hours(24);
-        $days = $this->scheduleService->days();
+        $hours = hours(24);
+        $days = days();
         $centers = MedicalCenter::all();
         $areas = MedicalArea::all();
 
@@ -46,10 +38,7 @@ class MedicalScheduleController extends Controller
 
     public function store(ScheduleRequest $request)
     {
-        $active = $request->active ? 1 : 0;
-        $request->merge(['active' => $active]);
-
-        MedicalSchedule::create($request->all());
+        MedicalSchedule::create($request->validated());
 
         return redirect()->route('medical.schedule.index')->withSuccess('Horario creado correctamente.');
     }
@@ -63,8 +52,8 @@ class MedicalScheduleController extends Controller
         ]);
 
         $schedule = MedicalSchedule::find($id);
-        $hours = $this->scheduleService->hours(24);
-        $days = $this->scheduleService->days();
+        $hours = hours(24);
+        $days = days();
         $centers = MedicalCenter::all();
         $areas = MedicalArea::all();
 
@@ -79,9 +68,6 @@ class MedicalScheduleController extends Controller
 
     public function update(ScheduleRequest $request)
     {
-        $active = $request->active ? 1 : 0;
-        $request->merge(['active' => $active]);
-        
         $schedule = MedicalSchedule::find($request->id);
         $schedule->update($request->all());
 

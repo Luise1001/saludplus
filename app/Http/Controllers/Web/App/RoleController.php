@@ -27,7 +27,7 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
-        Role::create($request->all());
+        Role::create($request->validated());
 
         return redirect()->route('role.index')->withSuccess('Rol creado correctamente.');
     }

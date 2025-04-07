@@ -22,6 +22,9 @@ class DoctorRequest extends FormRequest
      */
     public function rules(): array
     {
+        $active = $this->active ? 1 : 0;
+        $this->merge(['active' => $active]);
+        
         return [
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -36,6 +39,7 @@ class DoctorRequest extends FormRequest
                 'required',
                 'exists:medical_areas,id',
             ],
+            'active' => 'nullable|boolean',
         ];
     }
 

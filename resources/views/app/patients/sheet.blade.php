@@ -12,13 +12,14 @@
 @endsection
 
 
-@include('app.layouts.components.alerts')
 
 @section('content')
+    @include('app.layouts.components.alerts')
+
     <div class="card p-5 m-5 mb-5 mb-xl-5">
         <div class="card-header border-0">
             <div class="card-title">
-                <h2 class="fw-bold mb-0">Comprobante</h2>
+                <h2 class="fw-bold mb-0">Comprobante de cita</h2>
             </div>
         </div>
 
@@ -32,9 +33,13 @@
 
                         <div class="me-3">
                             <div class="d-flex align-items-center">
-                                <div class="text-gray-800 fw-bold">Centro médico</div>
+                                <div class="text-gray-800 fw-bold">{{ ucwords($reservation->MedicalCenter->name) }} </div>
                             </div>
-                            <div class="text-muted">Catia la mar, vista al mar</div>
+                            <div class="text-muted">
+                                {{ $reservation->MedicalCenter->state->name }}
+                                {{ $reservation->MedicalCenter->municipality->name }}
+                                {{ $reservation->MedicalCenter->parish->name }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,23 +50,36 @@
                             <table class="table table-flush fw-semibold gy-1">
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Nombre</td>
-                                    <td class="text-gray-800">Emma Smith</td>
+                                    <td class="text-gray-800">
+                                        {{ ucwords($reservation->patient->name) }}
+                                        {{ ucwords($reservation->patient->last_name) }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Cédula</td>
-                                    <td class="text-gray-800">123456789</td>
+                                    <td class="text-gray-800">{{ $reservation->patient->document }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Teléfono</td>
-                                    <td class="text-gray-800">0414444090</td>
+                                    <td class="text-gray-800">{{ $reservation->patient->phone }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Edad</td>
-                                    <td class="text-gray-800">34</td>
+                                    <td class="text-gray-800">{{ $reservation->patient->age }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Dirección</td>
-                                    <td class="text-gray-800">Catia la mar edo. vargas</td>
+                                    <td class="text-gray-800">
+                                        {{ $reservation->patient->state->name }}
+                                        {{ $reservation->patient->municipality->name }}
+                                        {{ $reservation->patient->parish->name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted min-w-125px w-125px">Sector</td>
+                                    <td class="text-gray-800">
+                                        {{ $reservation->patient->sector }}
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -70,23 +88,34 @@
                             <table class="table table-flush fw-semibold gy-1">
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Área de atención</td>
-                                    <td class="text-gray-800">Odontología</td>
+                                    <td class="text-gray-800">{{ ucwords($reservation->MedicalArea->name) }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Especialista</td>
-                                    <td class="text-gray-800">Ricardo perez</td>
+                                    <td class="text-gray-800">
+                                        {{ $reservation->doctor->name }}
+                                        {{ $reservation->doctor->last_name }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Fecha</td>
-                                    <td class="text-gray-800">04-04-2025</td>
+                                    <td class="text-gray-800">{{ date('d-m-Y', strtotime($reservation->date)) }} </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted min-w-125px w-125px">Día</td>
+                                    <td class="text-gray-800">{{ $reservation->MedicalSchedule->day }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Hora</td>
-                                    <td class="text-gray-800">1:00 PM</td>
+                                    <td class="text-gray-800">{{ date('h:i A', strtotime($reservation->MedicalSchedule->hour)) }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-muted min-w-125px w-125px">Observación</td>
-                                    <td class="text-gray-800">Alergia al trabajo</td>
+                                    <td class="text-gray-800">{{ $reservation->observation }} </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted min-w-125px w-125px">Estatus</td>
+                                    <td class="text-gray-800">{{ ucfirst($reservation->status) }} </td>
                                 </tr>
                             </table>
                         </div>
@@ -94,10 +123,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-md btn-primary btn-active-light-primary">Descargar</button>
     </div>
 @endsection
 

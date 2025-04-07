@@ -5,14 +5,15 @@ use App\Http\Controllers\Web\App\MainController;
 use App\Http\Controllers\Web\App\RoleController;
 use App\Http\Controllers\Web\App\PermissionController;
 use App\Http\Controllers\Web\App\Auth\AuthController;
-use App\Http\Controllers\Web\App\PatientController;
-use App\Http\Controllers\Web\App\ReservationController;
+use App\Http\Controllers\Web\App\Patient\PatientController;
+use App\Http\Controllers\Web\App\Patient\ReservationController;
 use App\Http\Controllers\Web\App\ProfileController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterSettingController;
 use App\Http\Controllers\Web\App\Administration\MedicalAreaController;
 use App\Http\Controllers\Web\App\Administration\DoctorController;
 use App\Http\Controllers\Web\App\Administration\MedicalScheduleController;
+use App\Http\Controllers\Web\App\Administration\CenterReservationController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -37,7 +38,7 @@ Route::middleware([
     'permissions'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return redirect()->route('reservation.index');
+        return view('dashboard');
     })->name('dashboard');
 
     /**
@@ -102,6 +103,13 @@ Route::middleware([
     Route::post('/horarios/crear', [MedicalScheduleController::class, 'store'])->name('medical.schedule.store');
     Route::put('/horarios/editar', [MedicalScheduleController::class, 'update'])->name('medical.schedule.update');
     Route::get('/horarios/editar/id={id}', [MedicalScheduleController::class, 'edit'])->name('medical.schedule.edit');
+
+    /**
+     * Center Reservation
+     */
+    Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
+    Route::get('/centro-medico/citas/confirmar/id={id}', [CenterReservationController::class, 'confirm'])->name('center.reservation.confirm');
+    Route::get('/centro-medico/citas/cancelar/id={id}', [CenterReservationController::class, 'cancel'])->name('center.reservation.cancel');
 
     /**
      * Users

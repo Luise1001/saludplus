@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Services\Schedule;
-
 use Carbon\Carbon;
+use App\Models\Patient\Reservation;
 
-class ScheduleService
-{
-    public function hours(int $format)
+if (!function_exists('hours')) {
+    function hours(int $format)
     {
         $hours = collect();
         $start = Carbon::createFromTime(0, 0);
@@ -18,39 +16,51 @@ class ScheduleService
 
         return $hours;
     }
+}
 
-    public function days()
+if (!function_exists('days')) {
+    function days()
     {
         return [
-            'Lunes' => 'Lunes',
-            'Martes' => 'Martes',
-            'Miercoles' => 'Miércoles',
-            'Jueves' => 'Jueves',
-            'Viernes' => 'Viernes',
-            'Sabado' => 'Sábado',
-            'Domingo' => 'Domingo'
+            'Monday' => 'Lunes',
+            'Tuesday' => 'Martes',
+            'Wednesday' => 'Miércoles',
+            'Thursday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sábado',
+            'Sunday' => 'Domingo'
         ];
     }
+}
 
-    public function englishDays($days)
+if (!function_exists('day')) {
+    function day($day)
     {
-        return collect($days)->map(function ($day) {
-            switch ($day) {
-                case 'Lunes':
-                    return 'Monday';
-                case 'Martes':
-                    return 'Tuesday';
-                case 'Miercoles':
-                    return 'Wednesday';
-                case 'Jueves':
-                    return 'Thursday';
-                case 'Viernes':
-                    return 'Friday';
-                case 'Sabado':
-                    return 'Saturday';
-                case 'Domingo':
-                    return 'Sunday';
-            }
-        });
+        $days = [
+            'Monday' => 'Lunes',
+            'Tuesday' => 'Martes',
+            'Wednesday' => 'Miércoles',
+            'Thursday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sábado',
+            'Sunday' => 'Domingo'
+        ];
+
+        return $days[$day] ?? null;
+    }
+}
+
+if (!function_exists('schedule_slots')) {
+    function schedule_slots($medical_center_id, $medical_area_id, $scheduleIds, $startDate, $endDate)
+    {
+        return Reservation::where('medical_center_id', $medical_center_id)
+            ->where('medical_area_id', $medical_area_id)
+            ->whereIn('medical_schedule_id', $scheduleIds)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->where('status', 'pendiente')
+            ->selectRaw('medical_schedule_id, COUNT(*) as slots')
+            ->selectRaw('date')
+            ->groupBy('date', 'medical_schedule_id')
+            ->get();
     }
 }
