@@ -10,7 +10,7 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: base64:TU_CLAVE_GENERADA
+        value: base64:ajh8PYQyduexLrC0TC3pyxji/H2SJ1o2chinVSSxARI=
       - key: APP_URL
         value: https://saludplus-demo.onrender.com
       - key: DB_CONNECTION
