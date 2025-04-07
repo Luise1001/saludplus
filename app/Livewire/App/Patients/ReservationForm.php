@@ -4,10 +4,10 @@ namespace App\Livewire\App\Patients;
 
 use Livewire\Component;
 use Carbon\Carbon;
-use App\Services\Schedule\ScheduleService;
 use App\Models\Administration\MedicalCenter;
 use App\Models\Administration\MedicalCenterDoctor;
 use App\Models\Administration\MedicalSchedule;
+use function schedule_slots as ScheduleSlots;
 
 class ReservationForm extends Component
 {
@@ -86,7 +86,6 @@ class ReservationForm extends Component
 
     public function loadAvailableDates()
     {
-        $scheduleService = new ScheduleService();
         $MedicalSchedules = MedicalSchedule::where('medical_center_id', $this->medical_center_id)
             ->where('medical_area_id', $this->medical_area_id)->where('active', true)->get();
 
@@ -97,7 +96,7 @@ class ReservationForm extends Component
 
         $startDate = Carbon::today();
         $endDate = Carbon::today()->addMonth(2);
-        $reservations = $scheduleService->ScheduleSlots($this->medical_center_id, $this->medical_area_id, $schedulesIds, $startDate, $endDate);
+        $reservations = ScheduleSlots($this->medical_center_id, $this->medical_area_id, $schedulesIds, $startDate, $endDate);
         $availableDates = [];
 
         for ($date = $startDate; $date <= $endDate; $date->addDay()) {

@@ -22,6 +22,9 @@ class RoleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $active = $this->active ? 1 : 0;
+        $this->merge(['active' => $active]);
+        
         return [
             'name' => [
                 'required',

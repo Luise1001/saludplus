@@ -36,9 +36,6 @@ class MedicalCenterController extends Controller
 
   public function store(MedicalCenterRequest $request)
   {
-    $active = $request->active ? 1 : 0;
-    $request->merge(['active' => $active]);
-
     MedicalCenter::create($request->validated());
 
     return redirect()->route('medical.center.index')->withSuccess('Centro médico creado con éxito.');
@@ -70,9 +67,6 @@ class MedicalCenterController extends Controller
 
   public function update(MedicalCenterRequest $request)
   {
-    $active = $request->active ? 1 : 0;
-    $request->merge(['active' => $active]);
-
     $center = MedicalCenter::find($request->id);
     $center->update($request->all());
 

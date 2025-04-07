@@ -108,6 +108,8 @@ Route::middleware([
      * Center Reservation
      */
     Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
+    Route::get('/centro-medico/citas/confirmar/id={id}', [CenterReservationController::class, 'confirm'])->name('center.reservation.confirm');
+    Route::get('/centro-medico/citas/cancelar/id={id}', [CenterReservationController::class, 'cancel'])->name('center.reservation.cancel');
 
     /**
      * Users

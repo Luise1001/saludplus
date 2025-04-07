@@ -22,6 +22,9 @@ class ScheduleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $active = $this->active ? 1 : 0;
+        $this->merge(['active' => $active]);
+
         return [
             'medical_center_id' => 'required|integer|exists:medical_centers,id',
             'medical_area_id' => 'required|integer|exists:medical_areas,id',

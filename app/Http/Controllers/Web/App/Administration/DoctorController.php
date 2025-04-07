@@ -30,9 +30,6 @@ class DoctorController extends Controller
 
     public function store(DoctorRequest $request)
     {
-        $active = $request->active ?? 0;
-        $request->merge(['active' => $active]);
-
         Doctor::create($request->validated());
 
         return redirect()->route('doctor.index')->withSuccess('Especialista creado con éxito.');
@@ -60,9 +57,6 @@ class DoctorController extends Controller
 
     public function update(DoctorRequest $request)
     {
-        $active = $request->active ?? 0;
-        $request->merge(['active' => $active]);
-        
         $doctor = Doctor::find($request->id);
         $doctor->update($request->all());
 

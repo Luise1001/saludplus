@@ -27,10 +27,10 @@
                             <span class="text-gray-900 fw-bold">{{ ucwords($row->medicalArea->name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ $row->day }} </span>
+                            <span class="text-gray-900 fw-bold">{{ day($row->day) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ $row->hour }} </span>
+                            <span class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->hour)) }} </span>
                         </td>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ $row->slots }} </span>

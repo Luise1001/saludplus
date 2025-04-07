@@ -54,9 +54,6 @@ class MedicalAreaController extends Controller
 
     public function update(MedicalAreaRequest $request)
     {
-        $active = $request->active ?? 0;
-        $request->merge(['active' => $active]);
-
         $area = MedicalArea::find($request->id);
         $area->update($request->all());
 
