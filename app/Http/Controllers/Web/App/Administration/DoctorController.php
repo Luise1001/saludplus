@@ -33,7 +33,7 @@ class DoctorController extends Controller
         $active = $request->active ?? 0;
         $request->merge(['active' => $active]);
 
-        Doctor::create($request->all());
+        Doctor::create($request->validated());
 
         return redirect()->route('doctor.index')->withSuccess('Especialista creado con éxito.');
     }

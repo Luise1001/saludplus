@@ -49,10 +49,10 @@
                                     </div>
 
                                     <div class="col-md-6 fv-row">
-                                        <label for="birth_date" class="form-label required fs-5 fw-semibold mb-2">Fecha de
+                                        <label for="birthday" class="form-label required fs-5 fw-semibold mb-2">Fecha de
                                             nacimiento</label>
                                         <input type="text" class="form-control form-control-solid"
-                                            placeholder="Fecha de nacimiento" id="birth_date" name="birth_date" />
+                                            placeholder="Fecha de nacimiento" id="birthday" name="birthday" />
                                     </div>
                                 </div>
 
@@ -165,7 +165,7 @@
 
 @section('scripts')
     <script>
-        $("#birth_date").flatpickr({
+        $("#birthday").flatpickr({
             dateFormat: "d-m-Y",
             mode: "single"
         });

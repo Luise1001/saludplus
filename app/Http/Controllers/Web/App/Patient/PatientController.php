@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\App;
+namespace App\Http\Controllers\Web\App\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -43,6 +43,8 @@ class PatientController extends Controller
 
     public function register(PatientRequest $request)
     {
+        $date = Carbon::parse($request->birthday)->format('Y-m-d');
+        $request->merge(['birthday' => $date]);
         $patient = Patient::create($request->validated());
 
         return redirect()->route('reservation.index', [

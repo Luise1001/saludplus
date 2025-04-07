@@ -49,7 +49,7 @@ class MedicalScheduleController extends Controller
         $active = $request->active ? 1 : 0;
         $request->merge(['active' => $active]);
 
-        MedicalSchedule::create($request->all());
+        MedicalSchedule::create($request->validated());
 
         return redirect()->route('medical.schedule.index')->withSuccess('Horario creado correctamente.');
     }

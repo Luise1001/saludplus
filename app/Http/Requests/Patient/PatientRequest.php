@@ -4,6 +4,7 @@ namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class PatientRequest extends FormRequest
 {
@@ -22,20 +23,15 @@ class PatientRequest extends FormRequest
      */
     public function rules(): array
     {
+        $date = Carbon::parse($this->birthday)->format('Y-m-d');
+        $this->merge(['birthday' => $date]);
+
         return [
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'document' => [
-                'required',
-                'numeric',
-                Rule::unique('patients', 'document')->ignore($this->id)
-            ],
-            'birth_date' => 'required|date_format:d-m-Y',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('patients', 'email')->ignore($this->id)
-            ],
+            'document' => ['required', 'numeric', Rule::unique('patients', 'document')->ignore($this->id)],
+            'birthday' => 'required|date_format:Y-m-d',
+            'email' => ['required', 'email', Rule::unique('patients', 'email')->ignore($this->id)],
             'phone' => 'required|string|max:20',
             'age' => 'required|integer|min:1|max:120',
             'state_id' => 'required|exists:states,id',
@@ -53,8 +49,8 @@ class PatientRequest extends FormRequest
             'document.required' => 'La cédula es obligatoria',
             'document.numeric' => 'La cédula solo puede contener números',
             'document.unique' => 'La cédula ya está registrada',
-            'birth_date.required' => 'La fecha de nacimiento es obligatoria',
-            'birth_date.date_format' => 'El formato de la fecha de nacimiento no es válido',
+            'birthday.required' => 'La fecha de nacimiento es obligatoria',
+            'birthday.date_format' => 'El formato de la fecha de nacimiento no es válido',
             'email.required' => 'El correo electrónico es obligatorio',
             'email.email' => 'El correo electrónico no es válido',
             'email.unique' => 'El correo electrónico ya está registrado',

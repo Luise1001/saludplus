@@ -5,8 +5,8 @@ use App\Http\Controllers\Web\App\MainController;
 use App\Http\Controllers\Web\App\RoleController;
 use App\Http\Controllers\Web\App\PermissionController;
 use App\Http\Controllers\Web\App\Auth\AuthController;
-use App\Http\Controllers\Web\App\PatientController;
-use App\Http\Controllers\Web\App\ReservationController;
+use App\Http\Controllers\Web\App\Patient\PatientController;
+use App\Http\Controllers\Web\App\Patient\ReservationController;
 use App\Http\Controllers\Web\App\ProfileController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterSettingController;
@@ -37,7 +37,7 @@ Route::middleware([
     'permissions'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return redirect()->route('reservation.index');
+        return view('dashboard');
     })->name('dashboard');
 
     /**

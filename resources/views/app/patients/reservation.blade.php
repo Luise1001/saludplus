@@ -75,7 +75,7 @@
 
             flatpickr("#calendar", {
                 mode: "single",
-                dateFormat: "Y-m-d",
+                dateFormat: "d-m-Y",
                 minDate: "today",
                 maxDate: lastDayOfNextMonth,
                 disable: [

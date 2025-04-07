@@ -70,13 +70,17 @@ class ReservationForm extends Component
 
     public function MedicalSchedule()
     {
-        if(!$this->medical_center_id || !$this->medical_area_id) {
+        if (!$this->medical_center_id || !$this->medical_area_id) {
             return;
         }
+
+        $date = Carbon::parse($this->date);
+        $day = $date->format('l');
 
         $this->schedules = MedicalSchedule::where('medical_center_id', $this->medical_center_id)
             ->where('medical_area_id', $this->medical_area_id)
             ->where('active', true)
+            ->where('day', $day)
             ->get();
     }
 
@@ -84,25 +88,31 @@ class ReservationForm extends Component
     {
         $scheduleService = new ScheduleService();
         $MedicalSchedules = MedicalSchedule::where('medical_center_id', $this->medical_center_id)
-            ->where('medical_area_id', $this->medical_area_id)
-            ->where('active', true)
-            ->get();
+            ->where('medical_area_id', $this->medical_area_id)->where('active', true)->get();
 
-        $ScheduleDays = [];
+        $schedulesIds = $MedicalSchedules->pluck('id')->toArray();
+        $ScheduleDays = $MedicalSchedules->map(function ($schedule) {
+            return ['day' => $schedule->day, 'schedule_id' => $schedule->id];
+        })->unique()->toArray();
 
-        foreach ($MedicalSchedules as $schedule) {;
-            $ScheduleDays[] = $schedule->day;
-        }
-
-        $ScheduleDays = $scheduleService->englishDays($ScheduleDays)->toArray();
         $startDate = Carbon::today();
         $endDate = Carbon::today()->addMonth(2);
+        $reservations = $scheduleService->ScheduleSlots($this->medical_center_id, $this->medical_area_id, $schedulesIds, $startDate, $endDate);
         $availableDates = [];
 
         for ($date = $startDate; $date <= $endDate; $date->addDay()) {
-            if (in_array($date->format('l'), $ScheduleDays)) {
 
-                $availableDates[] = $date->format('Y-m-d');
+            foreach ($ScheduleDays as $day) {
+                if ($day['day'] == $date->format('l')) {
+
+                    $reservation = $reservations->where('medical_schedule_id', $day['schedule_id'])
+                        ->where('date', $date->format('Y-m-d'))->first();
+                    $schedule = $MedicalSchedules->where('id', $day['schedule_id'])->first();
+
+                    if (!isset($reservation) || $reservation->slots < $schedule->slots) {
+                        $availableDates[] = $date->format('d-m-Y');
+                    }
+                }
             }
         }
 

@@ -28,7 +28,7 @@ class MedicalAreaController extends Controller
         $active = $request->active ?? 0;
         $request->merge(['active' => $active]);
 
-        MedicalArea::create($request->all());
+        MedicalArea::create($request->validated());
 
         return redirect()->route('medical.area.index')->withSuccess('Área de atención creada exitosamente.');
     }
