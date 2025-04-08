@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Administration\MedicalCenter;
 use App\Models\Administration\MedicalArea;
+use App\Models\Patient\Reservation;
 
 class MedicalSchedule extends Model
 {
@@ -29,5 +30,10 @@ class MedicalSchedule extends Model
     public function medicalArea()
     {
         return $this->belongsTo(MedicalArea::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

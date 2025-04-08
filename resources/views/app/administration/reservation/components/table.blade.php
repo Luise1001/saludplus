@@ -38,7 +38,7 @@
                         </td>
                         <td>
                             <span
-                                class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->MedicalSchedule->hour)) }}
+                                class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->medicalSchedule->hour)) }}
                             </span>
                         </td>
                         <td>

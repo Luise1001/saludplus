@@ -11,7 +11,7 @@ class CenterReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with(['patient', 'doctor', 'medicalCenter', 'medicalSchedule', 'user'])->get();
+        $reservations = Reservation::with('patient', 'doctor', 'medicalCenter', 'medicalSchedule', 'user')->get();
 
 
         return view('app.administration.reservation.index', [
