@@ -7,7 +7,7 @@
                 @endfor
             </i>
         </span>
-        <span class="menu-title">{{ Str::upper($permissions->first()->menu->name) }} </span>
+        <span class="menu-title text-warning">{{ Str::upper($permissions->first()->menu->name) }} </span>
         <span class="menu-arrow"></span>
     </span>
 

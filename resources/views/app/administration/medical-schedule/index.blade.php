@@ -19,11 +19,11 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold">Horarios </h2>
+                <h2 class="fw-bold text-warning">Horarios </h2>
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('medical.schedule.create') }}"class="btn btn-sm btn-primary btn-active-light-primary">
+                <a href="{{ route('medical.schedule.create') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     <i class="ki-duotone ki-plus-square fs-3">
                         <span class="path1"></span>
                         <span class="path2"></span>

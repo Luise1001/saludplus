@@ -2,14 +2,14 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Cédula</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Especialidad</th>
-                <th>Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Nombres</th>
+                <th class="text-warning">Apellidos</th>
+                <th class="text-warning">Cédula</th>
+                <th class="text-warning">Teléfono</th>
+                <th class="text-warning">Dirección</th>
+                <th class="text-warning">Especialidad</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -56,6 +56,6 @@
 
     <div class="card-body text-center">
         <button type="submit" form="form_doctor"
-            class="btn btn-md btn-primary btn-active-light-primary">Guardar</button>
+            class="btn btn-md btn-warning btn-active-light-warning">Guardar</button>
     </div>
 </div>

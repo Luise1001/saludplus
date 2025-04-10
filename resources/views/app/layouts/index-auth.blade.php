@@ -60,7 +60,7 @@
             @yield('sidebar')
 
             <div id="kt_app_content" class="app-content flex-column-fluid">
-                <div id="kt_app_content_container" class="app-container">
+                <div id="kt_app_content_container" class="app-container container-xxl">
                     @yield('content')
                 </div>
             </div>
@@ -75,7 +75,6 @@
                        <span class="f-6 text-warning">Salud plus</span>
                     </a>
                 </div>
-
 
             </div>
         </div>

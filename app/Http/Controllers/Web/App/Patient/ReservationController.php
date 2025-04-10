@@ -68,10 +68,10 @@ class ReservationController extends Controller
 
     public function sheet()
     {
-        $reservation = session('reservation');
+        $reservation = Reservation::first(); //session('reservation');
 
         if (!$reservation) {
-            return redirect()->route('reservation.index')->withErrors('No se encontró la cita.');
+            return redirect()->route('app.index')->withErrors('No se encontró la cita.');
         }
 
         return view('app.patients.sheet', [

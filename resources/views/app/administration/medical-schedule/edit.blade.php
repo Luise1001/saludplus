@@ -19,11 +19,11 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold">Editar horario</h2>
+                <h2 class="fw-bold text-warning">Editar horario</h2>
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('medical.schedule.index') }}"class="btn btn-sm btn-primary btn-active-light-primary">
+                <a href="{{ route('medical.schedule.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     Listado
                 </a>
             </div>
@@ -39,7 +39,7 @@
                     <input type="hidden" name="id" value="{{ $schedule->id }}">
                     <div class="row mb-5">
                         <div class="fv-row col-md-6">
-                            <label for="medical_center_id" class="form-label required fs-5 fw-semibold mb-2">Centro
+                            <label for="medical_center_id" class="form-label text-warning required fs-5 fw-semibold mb-2">Centro
                                 médico</label>
                             <select name="medical_center_id" class="form-select form-select-solid">
                                 <option value="">Seleccionar</option>
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="fv-row col-md-6">
-                            <label for="medical_area_id" class="form-label required fs-5 fw-semibold mb-2">Área de atención</label>
+                            <label for="medical_area_id" class="form-label text-warning required fs-5 fw-semibold mb-2">Área de atención</label>
                             <select name="medical_area_id" class="form-select form-select-solid">
                                 <option value="">Seleccionar</option>
                                 @if (isset($areas) && count($areas) > 0)
@@ -66,7 +66,7 @@
 
                     <div class="row mb-5">
                         <div class="fv-row col-md-6">
-                            <label for="day" class="form-label required fs-5 fw-semibold mb-2">Día</label>
+                            <label for="day" class="form-label text-warning required fs-5 fw-semibold mb-2">Día</label>
                             <select name="day" class="form-select form-select-solid">
                                 <option value="">Seleccionar</option>
                                 @if (isset($days) && count($days) > 0)
@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="fv-row col-md-6">
-                            <label for="hour" class="form-label required fs-5 fw-semibold mb-2">Hora</label>
+                            <label for="hour" class="form-label text-warning required fs-5 fw-semibold mb-2">Hora</label>
                             <select name="hour" class="form-select form-select-solid">
                                 <option value="">Seleccionar</option>
                                 @if (isset($hours) && count($hours) > 0)
@@ -91,7 +91,7 @@
 
                         <div class="row mb-5">
                             <div class="fv-row col-md-6">
-                                <label for="slots" class="form-label required fs-5 fw-semibold mb-2">Cupos</label>
+                                <label for="slots" class="form-label text-warning required fs-5 fw-semibold mb-2">Cupos</label>
                                 <input type="number" min="1" max="100" class="form-control form-control-solid"
                                     placeholder="Cupos" name="slots" value="{{ $schedule->slots }}" />
                             </div>
@@ -108,7 +108,7 @@
                         <div class="separator mb-5"></div>
 
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+                            <button type="submit" class="btn btn-warning btn-active-light-warning" id="kt_careers_submit_button">
                                 Guardar
                             </button>
                         </div>

@@ -6,6 +6,19 @@
         .flatpickr-disabled {
             background-color: rgb(246, 74, 74) !important;
         }
+
+        @media (min-width: 500px) {
+            .flatpickr-calendar {
+                transform: scale(1.5);
+                transform-origin: top left;
+            }
+
+            .flatpickr-day {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+            }
+        }
     </style>
 @endsection
 
@@ -29,12 +42,12 @@
                     <div class="position-relative mb-5">
                         <div class="overlay overlay-show">
                             <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px"
-                                style="background-image:url('assets/media/stock/1600x800/img-1.jpg')"></div>
+                                style="background-image:url('assets/media/auth/register.png')"></div>
                             <div class="overlay-layer rounded bg-black" style="opacity: 0.4"></div>
                         </div>
 
-                        <div class="position-absolute text-white mb-8 ms-10 bottom-0">
-                            <h3 class="text-white fs-2qx fw-bold mb-3 m">Reservación de cita</h3>
+                        <div class="position-absolute text-warning mb-8 ms-10 bottom-0">
+                            <h3 class="text-warning fs-2qx fw-bold mb-3 m">Reservación de cita</h3>
                             <div class="fs-5 fw-semibold"></div>
                         </div>
                     </div>
@@ -53,43 +66,5 @@
 
 @section('scripts')
     @livewireScripts()
-    <script>
-        const calendar = document.getElementById('calendar');
-        const today = new Date();
-        const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-        const lastDayOfNextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 0);
-        let availableDates = [];
-
-        Livewire.on('datePicker', (dates) => {
-            availableDates = dates[0][0];
-            initDate(lastDayOfNextMonth, availableDates);
-        });
-
-        calendar.setAttribute('readonly', true);
-
-
-        function initDate(lastDayOfNextMonth, availableDates) {
-            calendar.removeAttribute('readonly');
-            calendar.setAttribute('placeholder', 'Seleccione una fecha');
-            calendar.setAttribute('autocomplete', 'off');
-
-            flatpickr("#calendar", {
-                mode: "single",
-                dateFormat: "d-m-Y",
-                minDate: "today",
-                maxDate: lastDayOfNextMonth,
-                disable: [
-                    function(date) {
-                        return true;
-                    }
-                ],
-                enable: availableDates,
-                onDayCreate: function(dObj, dStr, dFrag, dayObj) {
-                    if (availableDates.includes(dayObj.dateStr)) {
-                        dayObj.classList.add('disabled-date');
-                    }
-                },
-            });
-        }
-    </script>
+    <script src="{{ asset('assets/js/app/patients/reservation.js') }}"></script>
 @endsection

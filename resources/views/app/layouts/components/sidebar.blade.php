@@ -7,14 +7,14 @@
 
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
             <a href="{{ route('app.index') }}" class="app-sidebar-logo-default">
-                {{-- <img alt="Logo" src="{{ asset('assets/media/logos/default-dark.svg') }}" class="h-25px app-sidebar-logo-default" />
-                <img alt="Logo" src="{{ asset('assets/media/logos/default-small.svg') }}"
-                    class="h-20px app-sidebar-logo-minimize" /> --}}
-                <h3>Salud Plus</h3>
+                <img alt="Logo" src="{{ asset('assets/media/svg/saludplus/icon_text_orange.svg') }}" class="h-50px app-sidebar-logo-default" />
+                <img alt="Logo" src="{{ asset('assets/media/svg/saludplus/icon.svg') }}"
+                    class="h-20px app-sidebar-logo-minimize" />
+   
             </a>
 
             <div id="kt_app_sidebar_toggle"
-                class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
+                class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-white btn-active-warning h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
                 data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
                 data-kt-toggle-name="app-sidebar-minimize">
                 <i class="ki-duotone ki-black-left-line fs-3 rotate-180">

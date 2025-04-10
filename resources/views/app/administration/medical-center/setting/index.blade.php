@@ -19,7 +19,7 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold"> {{ ucwords($center->name) }} </h2>
+                <h2 class="fw-bold text-warning"> {{ ucwords($center->name) }} </h2>
             </div>
         </div>
     </div>
@@ -27,17 +27,17 @@
     <div class="card p-5">
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#medical_area"
+                <a class="nav-link text-active-warning pb-4 active" data-bs-toggle="tab" href="#medical_area"
                     aria-selected="true" role="tab">Áreas de atención</a>
             </li>
 
             <li class="nav-item" role="presentation">
-                <a class="nav-link text-active-primary pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#doctor"
+                <a class="nav-link text-active-warning pb-4" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#doctor"
                     data-kt-initialized="1" aria-selected="false" tabindex="-1" role="tab">Especialistas</a>
             </li>
 
             <li class="nav-item" role="presentation">
-                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#schedule" aria-selected="false"
+                <a class="nav-link text-active-warning pb-4" data-bs-toggle="tab" href="#schedule" aria-selected="false"
                     tabindex="-1" role="tab">Horarios </a>
             </li>
         </ul>

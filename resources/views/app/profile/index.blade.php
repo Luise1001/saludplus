@@ -12,76 +12,40 @@
 @endsection
 
 @section('content')
-    <div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content" class="app-content flex-column-fluid mt-5">
         <div id="kt_app_content_container" class="app-container container-xxl">
 
             <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                 <div class="card-header cursor-pointer">
                     <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Información personal</h3>
+                        <h3 class="fw-bold text-warning m-0">Usuario</h3>
                     </div>
 
-                    <a href="account/settings.html" class="btn btn-sm btn-primary btn-active-light-primary align-self-center">Editar</a>
+                    <a href="#" class="btn btn-sm btn-warning btn-active-light-warning align-self-center">Editar</a>
                 </div>
 
                 <div class="card-body p-9">
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Nombres</label>
+                        <label class="col-lg-4 fw-semibold text-warning">Nombres</label>
 
                         <div class="col-lg-8">
-                            <span class="fw-bold fs-6 text-gray-800">Max smith</span>
+                            <span class="fw-bold fs-6 text-gray-800">{{ ucwords($user->name) }} </span>
                         </div>
                     </div>
 
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Apellidos</label>
+                        <label class="col-lg-4 fw-semibold text-warning">Correo electrónico</label>
                         <div class="col-lg-8 fv-row">
-                            <span class="fw-semibold text-gray-800 fs-6">Keenthemes</span>
+                            <span class="fw-semibold text-gray-800 fs-6">{{ $user->email }} </span>
                         </div>
                     </div>
 
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Teléfono</label>
+                        <label class="col-lg-4 fw-semibold text-warning">Rol</label>
                         <div class="col-lg-8 d-flex align-items-center">
-                            <span class="fw-bold fs-6 text-gray-800 me-2">044 3276 454 935</span>
+                            <span class="fw-bold fs-6 text-gray-800 me-2">{{ $user->role->display_name }} </span>
                         </div>
                     </div>
-
-                    <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Fecha de nacimiento</label>
-                        <div class="col-lg-8">
-                            <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">01-01-1969</a>
-                        </div>
-                    </div>
-
-                    <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Edad</label>
-                        <div class="col-lg-8">
-                            <span class="fw-bold fs-6 text-gray-800">60</span>
-                        </div>
-                    </div>
-
-                    <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Estado</label>
-                        <div class="col-lg-8">
-                            <span class="fw-bold fs-6 text-gray-800">La guaira</span>
-                        </div>
-                    </div>
-
-                    <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Parroquia</label>
-                        <div class="col-lg-8">
-                            <span class="fw-bold fs-6 text-gray-800">Catia la mar</span>
-                        </div>
-                    </div>
-
-                    <div class="row mb-7">
-                        <label class="col-lg-4 fw-semibold text-muted">Sector</label>
-                        <div class="col-lg-8">
-                            <span class="fw-bold fs-6 text-gray-800">Las tunitas</span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
