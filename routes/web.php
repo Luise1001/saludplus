@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\App\MenuController;
 use App\Http\Controllers\Web\App\MainController;
 use App\Http\Controllers\Web\App\RoleController;
 use App\Http\Controllers\Web\App\PermissionController;
@@ -41,6 +42,17 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    /**
+     * Menús
+     */
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    Route::get('/menu/crear', [MenuController::class, 'create'])->name('menu.create');
+    Route::post('/menu/crear', [MenuController::class, 'store'])->name('menu.store');
+    Route::put('/menu/editar', [MenuController::class, 'update'])->name('menu.update');
+    Route::get('/menu/editar/id={id}', [MenuController::class, 'edit'])->name('menu.edit');
+
+
+     
     /**
      * Roles 
      */
