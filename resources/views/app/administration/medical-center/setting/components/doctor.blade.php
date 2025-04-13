@@ -55,7 +55,9 @@
     </table>
 
     <div class="card-body text-center">
-        <button type="submit" form="form_doctor"
-            class="btn btn-md btn-warning btn-active-light-warning">Guardar</button>
+        @if (isset($doctors) && $doctors->count() > 0)
+            <button type="submit" form="form_doctor" class="btn btn-md btn-warning btn-active-light-warning">
+                Guardar
+            </button>
     </div>
 </div>

@@ -13,10 +13,15 @@ class MedicalSchedule extends Model
     use HasFactory;
     
     protected $table = 'medical_schedules';
+    protected $casts = [
+        'days' => 'array',
+        'hour' => 'datetime:H:i',
+        'active' => 'boolean',
+    ];
     protected $fillable = [
         'medical_center_id',
         'medical_area_id',
-        'day',
+        'days',
         'hour',
         'slots',
         'active'

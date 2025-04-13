@@ -59,7 +59,7 @@
             @yield('header')
             @yield('sidebar')
 
-            <div id="kt_app_content" class="app-content flex-column-fluid">
+            <div id="kt_app_content" class="app-content flex-column-fluid mt-3">
                 <div id="kt_app_content_container" class="app-container">
                     @yield('content')
                 </div>

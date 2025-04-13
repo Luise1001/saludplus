@@ -39,6 +39,9 @@
     </table>
 
     <div class="card-body text-center">
-        <button type="submit" form="form_area" class="btn btn-md btn-warning btn-active-light-warning">Guardar</button>
+        @if (isset($areas) && $areas->count() > 0)
+            <button type="submit" form="form_area"
+                class="btn btn-md btn-warning btn-active-light-warning">Guardar</button>
+        @endif
     </div>
 </div>

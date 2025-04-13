@@ -63,8 +63,8 @@
 
                     <div class="row mb-5">
                         <div class="fv-row col-md-6">
-                            <label for="day" class="form-label text-warning required fs-5 fw-semibold mb-2">Día</label>
-                            <select name="day" class="form-select form-select-solid">
+                            <label for="days" class="form-label text-warning required fs-5 fw-semibold mb-2">Días</label>
+                            <select multiple data-control="select2" name="days[]" class="form-select form-select-solid">
                                 <option value="">Seleccionar</option>
                                 @if (isset($days) && count($days) > 0)
                                     @foreach ($days as $key => $row)

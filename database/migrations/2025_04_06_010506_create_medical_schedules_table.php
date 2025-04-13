@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('medical_center_id')->constrained('medical_centers')->onDelete('cascade');
             $table->foreignId('medical_area_id')->constrained('medical_areas')->onDelete('cascade');
-            $table->string('day');
+            $table->string('days');
             $table->time('hour');
             $table->tinyInteger('slots')->default(1);
             $table->boolean('active')->default(false);

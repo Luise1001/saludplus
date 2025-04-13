@@ -80,7 +80,7 @@
                 @if (isset($schedules) && $schedules->count() > 0)
                     @foreach ($schedules as $row)
                         <option value="{{ $row->id }}">
-                            {{ $row->hour }}
+                            {{ date('h:i A', strtotime($row->hour)) }}
                         </option>
                     @endforeach
                 @endif

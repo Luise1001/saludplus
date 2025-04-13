@@ -5,7 +5,7 @@
                 <th class="text-warning">ID</th>
                 <th class="text-warning">Centro médico</th>
                 <th class="text-warning">Área</th>
-                <th class="text-warning">Día</th>
+                <th class="text-warning">Días</th>
                 <th class="text-warning">Hora</th>
                 <th class="text-warning">Cupos</th>
                 <th class="text-warning">Activo</th>
@@ -27,7 +27,9 @@
                             <span class="text-gray-900 fw-bold">{{ ucwords($row->medicalArea->name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ day($row->day) }} </span>
+                            @foreach ($row->days as $day)
+                                <span class="text-gray-900 fw-bold">{{ day($day) }} </span> <br>
+                            @endforeach
                         </td>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->hour)) }} </span>
@@ -49,7 +51,8 @@
                         </td>
                         <td class="text-end">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                <a href="{{ route('medical.schedule.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                <a href="{{ route('medical.schedule.edit', ['id' => $row->id]) }}"
+                                    class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
                                     <i class="ki-duotone ki-pencil fs-3">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
