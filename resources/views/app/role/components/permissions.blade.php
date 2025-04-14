@@ -21,10 +21,10 @@
                                 <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                             </td>
                             <td>
-                                <span class="text-gray-900 fw-bold">{{ Str::upper($row->menu->name) }} </span>
+                                <span class="text-gray-900 fw-bold">{{ ucwords($row->menu->name) }} </span>
                             </td>
                             <td>
-                                <span class="text-gray-900 fw-bold">{{ Str::upper($row->display_name) }} </span>
+                                <span class="text-gray-900 fw-bold">{{ ucwords($row->display_name) }} </span>
                             </td>
                             <td>
                                 <span class="text-gray-900">{{ $row->description }} </span>
