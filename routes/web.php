@@ -94,8 +94,8 @@ Route::middleware([
     /**
      * Medical Center Settings
      */
-    Route::group(['middleware' => ['check.user.permission:medical.center.manage']], function () {
-        Route::get('/centros-medicos/configuracion/id={id}', [MedicalCenterSettingController::class, 'index'])->name('medical.center.setting.index');
+    Route::group(['middleware' => ['check.user.permission:medical.center.setting']], function () {
+        Route::get('/centros-medicos/configuracion', [MedicalCenterSettingController::class, 'index'])->name('medical.center.setting.index');
         Route::put('/centros-medicos/configuracion/areas', [MedicalCenterSettingController::class, 'areas'])->name('medical.center.setting.areas');
         Route::put('/centros-medicos/configuracion/especialistas', [MedicalCenterSettingController::class, 'doctors'])->name('medical.center.setting.doctors');
     });
@@ -149,10 +149,10 @@ Route::middleware([
      * Center Reservation
      */
     Route::group(['middleware' => ['check.user.permission:reservation.manage']], function () {
-    Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
-    Route::get('/centro-medico/citas/confirmar/id={id}', [CenterReservationController::class, 'confirm'])->name('center.reservation.confirm');
-    Route::get('/centro-medico/citas/cancelar/id={id}', [CenterReservationController::class, 'cancel'])->name('center.reservation.cancel');
-   });
+        Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
+        Route::get('/centro-medico/citas/confirmar/id={id}', [CenterReservationController::class, 'confirm'])->name('center.reservation.confirm');
+        Route::get('/centro-medico/citas/cancelar/id={id}', [CenterReservationController::class, 'cancel'])->name('center.reservation.cancel');
+    });
 
     /**
      * Users

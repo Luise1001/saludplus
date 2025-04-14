@@ -21,7 +21,7 @@ class DoctorController extends Controller
 
     public function create()
     {
-        $areas = MedicalArea::all();
+        $areas = MedicalArea::select('id', 'name')->get();
 
         return view('app.administration.doctors.create', [
             'areas' => $areas,
@@ -47,7 +47,7 @@ class DoctorController extends Controller
         ]);
 
         $doctor = Doctor::find($id);
-        $areas = MedicalArea::all();
+        $areas = MedicalArea::select('id', 'name')->get();
 
         return view('app.administration.doctors.edit', [
             'doctor' => $doctor,

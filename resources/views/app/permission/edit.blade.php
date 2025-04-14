@@ -68,7 +68,7 @@
                             <label for="level" class="form-label text-warning required fs-5 fw-semibold mb-2">Nivel</label>
                             <select name="level" class="form-select form-select-solid">
                                 @for($i = auth()->user()->role->level; $i <= 10; $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                <option {{ $permission->level == $i ? 'selected' : '' }} value="{{ $i }}">{{ $i }}</option>
                             @endfor
                             </select>
                         </div>

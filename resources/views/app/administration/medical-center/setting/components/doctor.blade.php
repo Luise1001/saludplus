@@ -59,5 +59,6 @@
             <button type="submit" form="form_doctor" class="btn btn-md btn-warning btn-active-light-warning">
                 Guardar
             </button>
+        @endif
     </div>
 </div>

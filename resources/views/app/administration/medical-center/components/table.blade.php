@@ -61,13 +61,16 @@
                                 </div>
 
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Configuración">
-                                    <a href="{{ route('medical.center.setting.index', ['id' => $row->id]) }}"
-                                        class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
-                                        <i class="ki-duotone ki-setting-2 fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                    </a>
+                                    <form action="{{ route('medical.center.setting.index') }}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $row->id }}">
+                                        <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="submit">
+                                            <i class="ki-duotone ki-setting-2 fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>
