@@ -42,6 +42,11 @@
                 <a class="nav-link text-active-warning pb-4" data-bs-toggle="tab" href="#schedule" aria-selected="false"
                     tabindex="-1" role="tab">Horarios </a>
             </li>
+
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-active-warning pb-4" data-bs-toggle="tab" href="#user" aria-selected="false"
+                    tabindex="-1" role="tab">Usuarios </a>
+            </li>
         </ul>
 
         <div class="tab-content" id="medical_center_settings">
@@ -60,6 +65,12 @@
             <div class="tab-pane fade text-gray-600" id="schedule" role="tabpanel">
                 @include('app.administration.medical-center.setting.components.schedule', [
                     'schedules' => $schedules,
+                ])
+            </div>
+
+            <div class="tab-pane fade text-gray-600" id="user" role="tabpanel">
+                @include('app.administration.medical-center.setting.components.staff', [
+                    'users' => $users,
                 ])
             </div>
         </div>

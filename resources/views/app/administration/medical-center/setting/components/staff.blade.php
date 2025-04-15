@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <div class="d-flex justify-content-end p-5">
-        <a class="btn btn-sm btn-warning btn-active-light-warning" href="{{ route('hospital.schedule.create') }}">
+        <a class="btn btn-sm btn-warning btn-active-light-warning" href="{{ route('hospital.staff.create') }}">
             Nuevo
         </a>
     </div>
@@ -9,43 +9,38 @@
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                 <th class="text-warning">ID</th>
-                <th class="text-warning">Área</th>
-                <th class="text-warning">Día</th>
-                <th class="text-warning">Hora</th>
-                <th class="text-warning">Cupos</th>
-                <th class="text-warning">Activo</th>
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">Correo electrónico</th>
+                <th class="text-warning">Rol</th>
+                <th class="text-warning">Fecha</th>
                 <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
-            @if (isset($schedules) && $schedules->count() > 0)
-                @foreach ($schedules as $row)
+            @if (isset($users) && $users->count() > 0)
+                @foreach ($users as $row)
                     <tr>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ ucwords($row->medicalArea->name) }} </span>
+                            <span class="text-gray-900 fw-bold">{{ ucwords($row->staff->name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ $row->day }} </span>
+                            <span class="text-gray-900 fw-bold">{{ $row->staff->email }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->hour)) }} </span>
+                            <span class="text-gray-900 fw-bold">{{ $row->staff->role->display_name }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ $row->slots }} </span>
-                        </td>
-                        <td>
-                            @if ($row->active)
-                                <span class="badge badge-light-success">SI</span>
-                            @else
-                                <span class="badge badge-light-danger">NO</span>
-                            @endif
+                            <span class="text-gray-900 fw-bold">{{ $row->created_at->format('d/m/y') }} </span>
+                            <br>
+                            <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
                         <td>
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                <a href="{{ route('medical.schedule.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                <a href="{{ route('hospital.staff.edit', ['id' => $row->user_id]) }}"
+                                    class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
                                     <i class="ki-duotone ki-pencil fs-3">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

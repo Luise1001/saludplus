@@ -35,7 +35,7 @@
     </div>
 
     <div class="card p-5">
-        @include('app.hospital.medical-schedule.components.table')
+        @include('app.hospital.schedule.components.table')
     </div>
 @endsection
 

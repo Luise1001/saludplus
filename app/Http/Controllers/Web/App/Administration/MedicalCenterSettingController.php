@@ -8,6 +8,7 @@ use App\Models\Administration\MedicalCenter;
 use App\Models\Administration\MedicalArea;
 use App\Models\Administration\Doctor;
 use App\Models\Administration\MedicalSchedule;
+use App\Models\Administration\MedicalCenterStaff;
 
 class MedicalCenterSettingController extends Controller
 {
@@ -30,12 +31,22 @@ class MedicalCenterSettingController extends Controller
         $areas = MedicalArea::where('active', 1)->get();
         $doctors = Doctor::where('active', 1)->whereIn('medical_area_id', $center->medicalAreas->pluck('id'))->get();
         $schedules = MedicalSchedule::where('active', 1)->where('medical_center_id', $request->id)->get();
+        $staff = MedicalCenterStaff::with(['staff' => function ($query) {
+            $query->whereHas('role', function ($q) {
+                $q->where('level', '>', auth()->user()->role->level);
+            });
+        }])->where('medical_center_id', $request->id)->get();
+
+        $users = $staff->filter(function ($user) {
+            return $user->staff;
+        });
 
         return view('app.administration.medical-center.setting.index', [
             'center' => $center,
             'areas' => $areas,
             'doctors' => $doctors,
             'schedules' => $schedules,
+            'users' => $users,
         ]);
     }
 

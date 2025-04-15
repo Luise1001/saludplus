@@ -21,7 +21,7 @@ class HospitalScheduleController extends Controller
         $schedules = MedicalSchedule::with(['medicalCenter', 'medicalArea'])
             ->where('medical_center_id', $medical_center_id)->get();
 
-        return view('app.hospital.medical-schedule.index', [
+        return view('app.hospital.schedule.index', [
             'schedules' => $schedules
         ]);
     }
@@ -32,7 +32,7 @@ class HospitalScheduleController extends Controller
         $days = days();
         $areas = MedicalArea::select('id', 'name')->get();
 
-        return view('app.hospital.medical-schedule.create', [
+        return view('app.hospital.schedule.create', [
             'hours' => $hours,
             'days' => $days,
             'areas' => $areas,
@@ -92,7 +92,7 @@ class HospitalScheduleController extends Controller
         $days = days();
         $areas = MedicalArea::select('id', 'name')->get();
 
-        return view('app.hospital.medical-schedule.edit', [
+        return view('app.hospital.schedule.edit', [
             'schedule' => $schedule,
             'hours' => $hours,
             'days' => $days,

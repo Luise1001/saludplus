@@ -18,6 +18,7 @@ use App\Http\Controllers\Web\App\Administration\CenterReservationController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterStaffController;
 use App\Http\Controllers\Web\App\Hospital\HospitalDoctorController;
 use App\Http\Controllers\Web\App\Hospital\HospitalScheduleController;
+use App\Http\Controllers\Web\App\Hospital\HospitalStaffController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -188,6 +189,18 @@ Route::middleware([
             Route::post('/centro-medico/horarios/crear', [HospitalScheduleController::class, 'store'])->name('hospital.schedule.store');
             Route::put('/centro-medico/horarios/editar', [HospitalScheduleController::class, 'update'])->name('hospital.schedule.update');
             Route::get('/centro-medico/horarios/editar/id={id}', [HospitalScheduleController::class, 'edit'])->name('hospital.schedule.edit');
+        });
+
+        /**
+         *  Hospital Staff
+         */
+        Route::group(['middleware' => ['check.user.permission:hospital.staff.manage']], function () {
+            Route::get('/centro-medico/personal', [HospitalStaffController::class, 'index'])->name('hospital.staff.index');
+            Route::get('/centro-medico/personal/crear', [HospitalStaffController::class, 'create'])->name('hospital.staff.create');
+            Route::post('/centro-medico/personal/crear', [HospitalStaffController::class, 'store'])->name('hospital.staff.store');
+            Route::put('/centro-medico/personal/editar', [HospitalStaffController::class, 'update'])->name('hospital.staff.update');
+            Route::get('/centro-medico/personal/editar/id={id}', [HospitalStaffController::class, 'edit'])->name('hospital.staff.edit');
+            Route::get('/centro-medico/personal/editar/id={id}/asignar-centro', [HospitalStaffController::class, 'assign'])->name('hospital.staff.assign');
         });
     });
 });
