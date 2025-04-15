@@ -16,13 +16,15 @@
 @section('content')
     @include('app.layouts.components.alerts')
 
-    <div class="card card-flush mb-3 mt-3">
-        <div class="card-header">
-            <div class="card-title">
-                <h2 class="fw-bold text-warning"> {{ ucwords($center->name) }} </h2>
+    @if (!session('medical_center'))
+        <div class="card card-flush mb-3 mt-3">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2 class="fw-bold text-warning"> {{ ucwords($center->name) }} </h2>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="card p-5">
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8" role="tablist">

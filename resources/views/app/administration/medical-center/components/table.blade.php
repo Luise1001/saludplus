@@ -10,7 +10,7 @@
                 <th class="text-warning">Municipio</th>
                 <th class="text-warning">Parroquia</th>
                 <th class="text-warning">Fecha</th>
-                <th class="text-end text-warning">Acciones</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -48,7 +48,7 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                             <div class="d-flex justify-content-end">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                     <a href="{{ route('medical.center.edit', ['id' => $row->id]) }}"

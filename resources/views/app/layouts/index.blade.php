@@ -61,6 +61,9 @@
 
             <div id="kt_app_content" class="app-content flex-column-fluid mt-3">
                 <div id="kt_app_content_container" class="app-container">
+                    @if (session('medical_center'))
+                        @include('app.layouts.components.hospital-header')
+                    @endif
                     @yield('content')
                 </div>
             </div>
@@ -72,7 +75,7 @@
                 <div class="menu text-gray-900 order-2 order-md-1">
                     <span class="text-warning fw-semibold me-1 fs-6">{{ now()->format('Y') }} </span>
                     <a href="{{ route('app.index') }}" target="_blank" class="text-gray-800 text-hover-primary">
-                       <span class="f-6 text-warning">Salud plus</span>
+                        <span class="f-6 text-warning">Salud plus</span>
                     </a>
                 </div>
 

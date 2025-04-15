@@ -3,31 +3,41 @@
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                 <th class="text-warning">ID</th>
-                <th class="text-warning">Menú</th>
-                <th class="text-warning">Nombre</th>
-                <th class="text-warning">Nivel</th>
+                <th class="text-warning">Nombres</th>
+                <th class="text-warning">Apellidos</th>
+                <th class="text-warning">Cédula</th>
+                <th class="text-warning">Teléfono</th>
+                <th class="text-warning">Dirección</th>
+                <th class="text-warning">Especialidad</th>
                 <th class="text-warning">Activo</th>
-                <th class="text-warning">Descripción</th>
                 <th class="text-warning">Fecha</th>
                 <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
-            @if (isset($permissions) && $permissions->count() > 0)
-                @foreach ($permissions as $row)
+            @if (isset($doctors) && $doctors->count() > 0)
+                @foreach ($doctors as $row)
                     <tr>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ ucwords($row->menu->name) }} </span>
+                            <span class="text-gray-900 fw-bold">{{ ucwords($row->name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ ucwords($row->display_name) }} </span> <br>
-                            <span class="text-muted">{{ $row->name }} </span>
+                            <span class="text-gray-900 fw-bold">{{ ucwords($row->last_name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ $row->level }} </span>
+                            <span class="text-gray-900 fw-bold">{{ ucfirst($row->document) }} </span>
+                        </td>
+                        <td>
+                            <span class="text-gray-900 fw-bold">{{ $row->phone }} </span>
+                        </td>
+                        <td>
+                            <span class="text-gray-900 fw-bold">{{ $row->address}} </span>
+                        </td>
+                        <td>
+                            <span class="text-gray-900 fw-bold">{{ ucwords($row->medicalArea->name)}} </span>
                         </td>
                         <td>
                             @if ($row->active)
@@ -37,16 +47,13 @@
                             @endif
                         </td>
                         <td>
-                            <span class="text-gray-900">{{ $row->description }} </span>
-                        </td>
-                        <td>
                             <span class="text-gray-900 fw-bold">{{ $row->created_at->format('d/m/y') }} </span>
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
                         <td>
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                <a href="{{ route('permission.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                <a href="{{ route('hospital.doctor.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
                                     <i class="ki-duotone ki-pencil fs-3">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\App\Administration;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\Administration\ScheduleRequest;
 use App\Models\Administration\MedicalSchedule;

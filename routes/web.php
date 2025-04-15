@@ -16,7 +16,8 @@ use App\Http\Controllers\Web\App\Administration\DoctorController;
 use App\Http\Controllers\Web\App\Administration\MedicalScheduleController;
 use App\Http\Controllers\Web\App\Administration\CenterReservationController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterStaffController;
-use App\Models\Administration\MedicalCenterStaff;
+use App\Http\Controllers\Web\App\Hospital\HospitalDoctorController;
+use App\Http\Controllers\Web\App\Hospital\HospitalScheduleController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -94,7 +95,7 @@ Route::middleware([
     /**
      * Medical Center Settings
      */
-    Route::group(['middleware' => ['check.user.permission:medical.center.setting']], function () {
+    Route::group(['middleware' => ['check.user.permission:hospital.setting']], function () {
         Route::get('/centros-medicos/configuracion', [MedicalCenterSettingController::class, 'index'])->name('medical.center.setting.index');
         Route::put('/centros-medicos/configuracion/areas', [MedicalCenterSettingController::class, 'areas'])->name('medical.center.setting.areas');
         Route::put('/centros-medicos/configuracion/especialistas', [MedicalCenterSettingController::class, 'doctors'])->name('medical.center.setting.doctors');
@@ -121,6 +122,7 @@ Route::middleware([
         Route::put('/especialitas/editar', [DoctorController::class, 'update'])->name('doctor.update');
         Route::get('/especialitas/editar/id={id}', [DoctorController::class, 'edit'])->name('doctor.edit');
     });
+
 
     /**
      * Medical Schedule
@@ -158,4 +160,34 @@ Route::middleware([
      * Users
      */
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile.index');
+
+
+
+
+    /*******************************************************************************************************************************************
+     * Hospital routes
+     *******************************************************************************************************************************************/
+    Route::middleware(['check.hospital'])->group(function () {
+        /**
+         * Hospital doctors
+         */
+        Route::group(['middleware' => ['check.user.permission:hospital.doctor.manage']], function () {
+            Route::get('/centro-medico/especialistas', [HospitalDoctorController::class, 'index'])->name('hospital.doctor.index');
+            Route::get('/centro-medico/especialistas/crear', [HospitalDoctorController::class, 'create'])->name('hospital.doctor.create');
+            Route::post('/centro-medico/especialistas/crear', [HospitalDoctorController::class, 'store'])->name('hospital.doctor.store');
+            Route::put('/centro-medico/especialistas/editar', [HospitalDoctorController::class, 'update'])->name('hospital.doctor.update');
+            Route::get('/centro-medico/especialistas/editar/id={id}', [HospitalDoctorController::class, 'edit'])->name('hospital.doctor.edit');
+        });
+
+        /**
+         * Hospital schedule
+         */
+        Route::group(['middleware' => ['check.user.permission:hospital.schedule.manage']], function () {
+            Route::get('/centro-medico/horarios', [HospitalScheduleController::class, 'index'])->name('hospital.schedule.index');
+            Route::get('/centro-medico/horarios/crear', [HospitalScheduleController::class, 'create'])->name('hospital.schedule.create');
+            Route::post('/centro-medico/horarios/crear', [HospitalScheduleController::class, 'store'])->name('hospital.schedule.store');
+            Route::put('/centro-medico/horarios/editar', [HospitalScheduleController::class, 'update'])->name('hospital.schedule.update');
+            Route::get('/centro-medico/horarios/editar/id={id}', [HospitalScheduleController::class, 'edit'])->name('hospital.schedule.edit');
+        });
+    });
 });

@@ -22,7 +22,7 @@
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('medical.schedule.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
+                <a href="{{ route('hospital.schedule.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     Listado
                 </a>
             </div>
@@ -32,23 +32,10 @@
     <div class="card mb-5 p-5">
         <div class="d-flex flex-column flex-lg-row mb-5">
             <div class="flex-lg-row-fluid me-0 me-lg-20">
-                <form action="{{ route('medical.schedule.create') }}" class="form mb-15" method="post" id="kt_careers_form">
+                <form action="{{ route('hospital.schedule.create') }}" class="form mb-15" method="post"
+                    id="kt_careers_form">
                     @csrf
                     <div class="row mb-5">
-                        <div class="fv-row col-md-6">
-                            <label for="medical_center_id"
-                                class="form-label text-warning required fs-5 fw-semibold mb-2">Centro
-                                médico</label>
-                            <select name="medical_center_id" class="form-select form-select-solid">
-                                <option value="">Seleccionar</option>
-                                @if (isset($centers) && count($centers) > 0)
-                                    @foreach ($centers as $row)
-                                        <option value="{{ $row->id }}">{{ ucwords($row->short_name) }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-
                         <div class="fv-row col-md-6">
                             <label for="medical_area_id" class="form-label text-warning required fs-5 fw-semibold mb-2">Área
                                 de atención</label>
@@ -61,9 +48,7 @@
                                 @endif
                             </select>
                         </div>
-                    </div>
 
-                    <div class="row mb-5">
                         <div class="fv-row col-md-6">
                             <label for="days"
                                 class="form-label text-warning required fs-5 fw-semibold mb-2">Días</label>
@@ -76,7 +61,9 @@
                                 @endif
                             </select>
                         </div>
+                    </div>
 
+                    <div class="row mb-5">
                         <div class="fv-row col-md-6">
                             <label for="hour"
                                 class="form-label text-warning required fs-5 fw-semibold mb-2">Hora</label>
@@ -89,9 +76,7 @@
                                 @endif
                             </select>
                         </div>
-                    </div>
 
-                    <div class="row mb-5">
                         <div class="fv-row col-md-6">
                             <label for="slots"
                                 class="form-label text-warning required fs-5 fw-semibold mb-2">Cupos</label>

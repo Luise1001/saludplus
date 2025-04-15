@@ -1,4 +1,9 @@
 <div class="table-responsive">
+    <div class="d-flex justify-content-end p-5">
+        <a class="btn btn-sm btn-warning btn-active-light-warning" href="{{ route('hospital.doctor.create') }}">
+            Nuevo
+        </a>
+    </div>
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">

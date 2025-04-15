@@ -8,7 +8,7 @@
                 <th class="text-warning">Correo <br> electrónico</th>
                 <th class="text-warning">Rol</th>
                 <th class="text-warning">Fecha</th>
-                <th class="text-end text-warning">Acciones</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -35,7 +35,7 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                 <a href="{{ route('staff.edit', ['id' => $row->user_id]) }}"
                                     class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
