@@ -10,6 +10,7 @@ use App\Models\Patient\Patient;
 use App\Models\State;
 use App\Models\Municipality;
 use App\Models\Parish;
+use App\Models\User;
 
 class PatientController extends Controller
 {
@@ -47,6 +48,12 @@ class PatientController extends Controller
         $date = Carbon::parse($request->birthday)->format('Y-m-d');
         $request->merge(['birthday' => $date]);
         $patient = Patient::create($request->validated());
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            $patient->update(['user_id' => $user->id]);
+        }
 
         return redirect()->route('reservation.index', [
             'patient_id' => $patient->id

@@ -31,6 +31,14 @@ class RoleSeeder extends Seeder
             'active' => true
         ]);
 
+        Role::create([
+            'name' => 'admin_system',
+            'display_name' => 'admin system',
+            'level' => 2,
+            'color' => 'success',
+            'description' => 'Administrador del sistema',
+            'active' => true
+        ]);
 
         /**
          * all the next roles are for each hospital
@@ -92,7 +100,7 @@ class RoleSeeder extends Seeder
 
         Role::create([
             'name' => 'user',
-            'display_name' => 'Usuario general',
+            'display_name' => 'Paciente',
             'level' => 10,
             'color' => 'primary',
             'description' => 'Rol general para los usuarios del sistema, los pacientes.',

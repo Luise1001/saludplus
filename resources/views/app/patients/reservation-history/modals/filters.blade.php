@@ -9,7 +9,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('hospital.reservation.filter') }}" method="GET">
+                <form action="{{ route('patient.reservation.history.filter') }}" method="GET">
                     @csrf
                     <label for="date" class="form-label required text-warning fw-bold">Fecha</label>
                     <input class="form-control form-control-solid" name="date" placeholder="Rango de fecha"

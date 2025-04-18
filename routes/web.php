@@ -19,6 +19,7 @@ use App\Http\Controllers\Web\App\Administration\MedicalCenterStaffController;
 use App\Http\Controllers\Web\App\Hospital\HospitalDoctorController;
 use App\Http\Controllers\Web\App\Hospital\HospitalScheduleController;
 use App\Http\Controllers\Web\App\Hospital\HospitalStaffController;
+use App\Http\Controllers\Web\App\Patient\PatientReservationController;
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/acceder', [AuthController::class, 'login'])->name('auth.login');
@@ -33,7 +34,6 @@ Route::middleware(['permissions'])->group(function () {
 
     Route::get('/agendar-cita', [ReservationController::class, 'index'])->name('reservation.index');
     Route::post('/agendar-cita', [ReservationController::class, 'reserve'])->name('reservation.reserve');
-    Route::get('/comprobante', [ReservationController::class, 'sheet'])->name('reservation.sheet');
 });
 
 Route::middleware([
@@ -96,7 +96,7 @@ Route::middleware([
     /**
      * Medical Center Settings
      */
-    Route::group(['middleware' => ['check.user.permission:hospital.setting']], function () {
+    Route::group(['middleware' => ['check.user.permission:medical.center.setting']], function () {
         Route::get('/centros-medicos/configuracion', [MedicalCenterSettingController::class, 'index'])->name('medical.center.setting.index');
         Route::put('/centros-medicos/configuracion/areas', [MedicalCenterSettingController::class, 'areas'])->name('medical.center.setting.areas');
         Route::put('/centros-medicos/configuracion/especialistas', [MedicalCenterSettingController::class, 'doctors'])->name('medical.center.setting.doctors');
@@ -146,6 +146,20 @@ Route::middleware([
         Route::put('/personal/editar', [MedicalCenterStaffController::class, 'update'])->name('staff.update');
         Route::get('/personal/editar/id={id}', [MedicalCenterStaffController::class, 'edit'])->name('staff.edit');
         Route::get('/personal/editar/id={id}/asignar-centro', [MedicalCenterStaffController::class, 'assign'])->name('staff.assign');
+    });
+
+    /**
+     * Patient reservation history
+     */
+    Route::group([], function () {
+        Route::get('/pacientes/paciente/historial-citas', [PatientReservationController::class, 'history'])->name('patient.reservation.history')
+        ->middleware('check.user.permission:patient.reservation.history');
+
+        Route::get('/pacientes/paciente/filtrar-citas', [PatientReservationController::class, 'filter'])->name('patient.reservation.history.filter')
+        ->middleware('check.user.permission:patient.reservation.history');
+
+        Route::get('/pacientes/paciente/reservar-cita', [PatientReservationController::class, 'reserve'])->name('patient.reservation.reserve')
+        ->middleware('check.user.permission:patient.reservation.reserve');
     });
 
     /**
@@ -199,7 +213,7 @@ Route::middleware([
          */
         Route::group(['middleware' => ['check.user.permission:hospital.reservation.manage']], function () {
             Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('hospital.reservation.index');
-            Route::get('/centro-medico/citas/fecha', [CenterReservationController::class, 'search'])->name('hospital.reservation.search');
+            Route::get('/centro-medico/citas/fecha', [CenterReservationController::class, 'filter'])->name('hospital.reservation.filter');
             Route::post('/centro-medico/citas/confirmar', [CenterReservationController::class, 'confirm'])->name('hospital.reservation.confirm');
             Route::post('/centro-medico/citas/cancelar', [CenterReservationController::class, 'cancel'])->name('hospital.reservation.cancel');
         });

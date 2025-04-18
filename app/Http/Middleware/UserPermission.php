@@ -20,7 +20,10 @@ class UserPermission
         session()->forget('user_permissions');
 
         if (Auth::user()) {
-            $role = Role::with('permissions')->where('id', Auth::user()->role->id)->first();
+            $role = Role::with(['permissions' => function ($query) {
+                $query->orderBy('menu_id', 'asc');
+            }])->where('id', Auth::user()->role->id)->first();
+
             $permissions = $role->permissions->groupBy('menu_id');
 
             session(['user_permissions' => $permissions]);

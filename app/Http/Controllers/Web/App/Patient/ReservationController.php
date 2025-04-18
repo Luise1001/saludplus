@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web\App\Patient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Patient\ReservationRequest;
-use Carbon\Carbon;
 use App\Models\Patient\Patient;
 use App\Models\Patient\Reservation;
 
@@ -60,21 +59,9 @@ class ReservationController extends Controller
             'medicalSchedule'
         ])->find($new->id);
 
-        return redirect()->route('reservation.sheet')->withSuccess('Cita agendada con éxito.')->with([
-            'reservation' => $reservation
-        ]);
-    }
-
-    public function sheet()
-    {
-        $reservation = Reservation::first();
-
-        if (!$reservation) {
-            return redirect()->route('app.index')->withErrors('No se encontró la cita.');
-        }
-
         return view('app.patients.sheet', [
             'reservation' => $reservation
         ]);
     }
+
 }

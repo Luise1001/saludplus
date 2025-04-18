@@ -23,7 +23,7 @@
                     <div class="position-relative mb-5 mt-5">
                         <div class="overlay overlay-show">
                             <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px"
-                                style="background-image:url('assets/media/auth/register.png')"></div>
+                                style="background-image:url('{{ asset('assets/media/auth/register.png') }}')"></div>
                             <div class="overlay-layer rounded bg-black" style="opacity: 0.4"></div>
                         </div>
 

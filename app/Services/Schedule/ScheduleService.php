@@ -57,7 +57,7 @@ if (!function_exists('schedule_slots')) {
             ->where('medical_area_id', $medical_area_id)
             ->whereIn('medical_schedule_id', $scheduleIds)
             ->whereBetween('date', [$startDate, $endDate])
-            ->where('status', 'pendiente')
+            ->whereIn('status', ['pendiente', 'procesado'])
             ->selectRaw('medical_schedule_id, COUNT(*) as slots')
             ->selectRaw('date')
             ->groupBy('date', 'medical_schedule_id')

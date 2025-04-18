@@ -36,7 +36,7 @@ class CenterReservationController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function filter(Request $request)
     {
         $request->validate([
             'date' => 'required|string',
@@ -57,9 +57,8 @@ class CenterReservationController extends Controller
         $from = $dates['from'];
         $to = $dates['to'];
 
-        $reservations = Reservation::with('patient', 'doctor', 'medicalCenter', 'medicalSchedule', 'user')
+        $reservations = Reservation::with('patient', 'doctor', 'medicalCenter', 'medicalArea', 'medicalSchedule', 'user')
             ->where('medical_center_id', $medical_center_id)
-            ->where('status', 'pendiente')
             ->whereBetween('date', [$from, $to])
             ->when($request->medical_area_id, function ($query) use ($request) {
                 return $query->where('medical_area_id', $request->medical_area_id);
