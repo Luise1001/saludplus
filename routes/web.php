@@ -166,6 +166,7 @@ Route::middleware([
      * Users
      */
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/perfil', [ProfileController::class, 'password'])->name('profile.password.update');
 
 
 

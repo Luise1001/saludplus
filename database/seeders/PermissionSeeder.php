@@ -132,6 +132,24 @@ class PermissionSeeder extends Seeder
                 'active' => true,
                 'level' => 3,
             ],
+            [
+                'menu_id' => 2,
+                'route' => 'patient.reservation.history',
+                'name' => 'patient.reservation.history',
+                'display_name' => 'Historial de citas',
+                'description' => 'Gestionar el historial de citas médicas del paciente',
+                'active' => true,
+                'level' => 10,
+            ],
+            [
+                'menu_id' => 10,
+                'route' => 'patient.reservation.reserve',
+                'name' => 'patient.reservation.reserve',
+                'display_name' => 'Reservar cita',
+                'description' => 'Reservar una cita médica',
+                'active' => true,
+                'level' => 10,
+            ],
         ];
 
         $permissionIds = [];

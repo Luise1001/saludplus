@@ -12,16 +12,16 @@
 @endsection
 
 @section('content')
+    @include('app.layouts.components.alerts')
+
     <div id="kt_app_content" class="app-content flex-column-fluid mt-5">
         <div id="kt_app_content_container" class="app-container container-xxl">
 
-            <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+            <div class="card mb-5">
                 <div class="card-header cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold text-warning m-0">Usuario</h3>
                     </div>
-
-                    <a href="#" class="btn btn-sm btn-warning btn-active-light-warning align-self-center">Editar</a>
                 </div>
 
                 <div class="card-body p-9">
@@ -48,55 +48,115 @@
                     </div>
                 </div>
             </div>
+
+            @if (isset($patient) && $patient)
+                <div class="card mb-5">
+                    <div class="card-header cursor-pointer">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold text-warning m-0">Paciente</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-9">
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Nombres</label>
+
+                            <div class="col-lg-8">
+                                <span class="text-gray-900">{{ ucwords($patient->name.' '.$patient->last_name) }} </span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Cédula</label>
+                            <div class="col-lg-8 fv-row">
+                                <span class="text-gray-900">{{ $patient->document }} </span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Edad</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="text-gray-900">{{ $patient->age}} </span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Fecha de Nacimiento</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="text-gray-900">{{date('d-m-Y', strtotime( $patient->birthday))}} </span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Teléfono</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="text-gray-900">{{ $patient->phone}} </span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Dirección</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="text-gray-900">{{ $patient->state->name .', '. $patient->municipality->name.', '.$patient->parish->name}} </span>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <label class="col-lg-4 fw-semibold text-warning">Sector</label>
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="text-gray-900">{{ ucwords($patient->sector)}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="card mb-5 mb-xl-10">
+                <div class="card-header cursor-pointer">
+                    <div class="card-title m-0">
+                        <h3 class="fw-bold text-warning m-0">Cambiar Contraseña</h3>
+                    </div>
+                </div>
+
+                <div class="card-body p-9">
+                    <form action="{{ route('profile.password.update') }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        <div class="row mb-3">
+                            <div class="fv-row">
+                                <label for="current_password" class="form-label fw-bold text-warning required">Contraseña
+                                    actual</label>
+                                <input name="current_password" type="password" class="form-control form-control-solid"
+                                    placeholder="Contraseña actual" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="fv-row">
+                                <label for="new_password" class="form-label fw-bold text-warning required">Nueva
+                                    Contraseña</label>
+                                <input name="new_password" type="password" class="form-control form-control-solid"
+                                    placeholder="Nueva Contraseña" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="fv-row">
+                                <label for="confirm_password" class="form-label fw-bold text-warning required">Confirmar
+                                    Contraseña</label>
+                                <input name="confirm_password" type="password" class="form-control form-control-solid"
+                                    placeholder="Confirmar Contraseña" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 text-center mt-5">
+                            <div class="fv-row">
+                                <button type="submit"
+                                    class="btn btn-warning btn-active-light-warning fw-bold">Actualizar</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
 
 @section('scripts')
 @endsection
-
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
-        </div>
-    </div>
-</x-app-layout> --}}
