@@ -149,15 +149,6 @@ Route::middleware([
     });
 
     /**
-     * Center Reservation
-     */
-    Route::group(['middleware' => ['check.user.permission:reservation.manage']], function () {
-        Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('center.reservation.index');
-        Route::get('/centro-medico/citas/confirmar/id={id}', [CenterReservationController::class, 'confirm'])->name('center.reservation.confirm');
-        Route::get('/centro-medico/citas/cancelar/id={id}', [CenterReservationController::class, 'cancel'])->name('center.reservation.cancel');
-    });
-
-    /**
      * Users
      */
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile.index');
@@ -201,6 +192,16 @@ Route::middleware([
             Route::put('/centro-medico/personal/editar', [HospitalStaffController::class, 'update'])->name('hospital.staff.update');
             Route::get('/centro-medico/personal/editar/id={id}', [HospitalStaffController::class, 'edit'])->name('hospital.staff.edit');
             Route::get('/centro-medico/personal/editar/id={id}/asignar-centro', [HospitalStaffController::class, 'assign'])->name('hospital.staff.assign');
+        });
+
+        /**
+         * Center Reservation
+         */
+        Route::group(['middleware' => ['check.user.permission:hospital.reservation.manage']], function () {
+            Route::get('/centro-medico/citas', [CenterReservationController::class, 'index'])->name('hospital.reservation.index');
+            Route::get('/centro-medico/citas/fecha', [CenterReservationController::class, 'search'])->name('hospital.reservation.search');
+            Route::post('/centro-medico/citas/confirmar', [CenterReservationController::class, 'confirm'])->name('hospital.reservation.confirm');
+            Route::post('/centro-medico/citas/cancelar', [CenterReservationController::class, 'cancel'])->name('hospital.reservation.cancel');
         });
     });
 });

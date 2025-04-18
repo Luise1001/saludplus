@@ -64,3 +64,24 @@ if (!function_exists('schedule_slots')) {
             ->get();
     }
 }
+
+if (!function_exists('date_range')) {
+    function date_range($dateRange, $hour = false)
+    {
+        if (strpos($dateRange, ' to ') !== false) {
+            list($from, $to) = explode(' to ', $dateRange);
+        } else {
+            $from = $to = $dateRange;
+        }
+
+        $from = Carbon::createFromFormat('d-m-Y', $from)->format('Y-m-d');
+        $to = Carbon::createFromFormat('d-m-Y', $to)->format('Y-m-d');
+
+        if ($hour) {
+            $from = $from . ' 00:00:00';
+            $to = $to . ' 23:59:59';
+        }
+
+        return ['from' => $from, 'to' => $to];
+    }
+}

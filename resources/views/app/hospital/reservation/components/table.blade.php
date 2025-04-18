@@ -3,6 +3,7 @@
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                 <th class="text-warning">ID</th>
+                <th class="text-warning">Área</th>
                 <th class="text-warning">Paciente</th>
                 <th class="text-warning">Doctor</th>
                 <th class="text-warning">Motivo</th>
@@ -19,6 +20,9 @@
                     <tr>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
+                        </td>
+                        <td>
+                            <span class="text-gray-900 fw-bold">{{ $row->medicalArea->name }} </span>
                         </td>
                         <td>
                             <span
@@ -59,23 +63,31 @@
                             @if ($row->status == 'pendiente')
                                 <div class="d-flex justify-content-end">
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Confirmar">
-                                        <a href="{{ route('center.reservation.confirm', ['id' => $row->id]) }}"
-                                            class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
-                                            <i class="ki-duotone ki-double-check fs-3">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
+                                        <form action="{{ route('hospital.reservation.confirm') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $row->id }}">
+                                            <button reservation="{{ $row }}"
+                                                class="btn-confirm btn btn-sm btn-icon btn-active-light-primary me-1">
+                                                <i class="ki-duotone ki-double-check fs-3">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </button>
+                                        </form>
                                     </div>
 
                                     <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
-                                        <a href="{{ route('center.reservation.cancel', ['id' => $row->id]) }}"
-                                            class="btn btn-sm btn-icon btn-active-light-danger me-1" type="button">
-                                            <i class="ki-duotone ki-cross-circle fs-3">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
+                                        <form action="{{ route('hospital.reservation.cancel') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $row->id }}">
+                                            <button reservation="{{ $row }}"
+                                                class="btn-cancel btn btn-sm btn-icon btn-active-light-danger me-1">
+                                                <i class="ki-duotone ki-cross-circle fs-3">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             @endif
