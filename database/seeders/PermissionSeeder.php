@@ -118,7 +118,7 @@ class PermissionSeeder extends Seeder
                 'menu_id' => 3,
                 'route' => 'hospital.schedule.index',
                 'name' => 'hospital.schedule.manage',
-                'display_name' => 'Citas',
+                'display_name' => 'Horarios',
                 'description' => 'Gestionar los horarios del hospital',
                 'active' => true,
                 'level' => 3,
