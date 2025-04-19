@@ -62,7 +62,7 @@
                             <label class="col-lg-4 fw-semibold text-warning">Nombres</label>
 
                             <div class="col-lg-8">
-                                <span class="text-gray-900">{{ ucwords($patient->name.' '.$patient->last_name) }} </span>
+                                <span class="text-gray-900">{{ ucwords($patient->name . ' ' . $patient->last_name) }} </span>
                             </div>
                         </div>
 
@@ -76,84 +76,89 @@
                         <div class="row mb-5">
                             <label class="col-lg-4 fw-semibold text-warning">Edad</label>
                             <div class="col-lg-8 d-flex align-items-center">
-                                <span class="text-gray-900">{{ $patient->age}} </span>
+                                <span class="text-gray-900">{{ $patient->age }} </span>
                             </div>
                         </div>
                         <div class="row mb-5">
                             <label class="col-lg-4 fw-semibold text-warning">Fecha de Nacimiento</label>
                             <div class="col-lg-8 d-flex align-items-center">
-                                <span class="text-gray-900">{{date('d-m-Y', strtotime( $patient->birthday))}} </span>
+                                <span class="text-gray-900">{{ date('d-m-Y', strtotime($patient->birthday)) }} </span>
                             </div>
                         </div>
                         <div class="row mb-5">
                             <label class="col-lg-4 fw-semibold text-warning">Teléfono</label>
                             <div class="col-lg-8 d-flex align-items-center">
-                                <span class="text-gray-900">{{ $patient->phone}} </span>
+                                <span class="text-gray-900">{{ $patient->phone }} </span>
                             </div>
                         </div>
                         <div class="row mb-5">
                             <label class="col-lg-4 fw-semibold text-warning">Dirección</label>
                             <div class="col-lg-8 d-flex align-items-center">
-                                <span class="text-gray-900">{{ $patient->state->name .', '. $patient->municipality->name.', '.$patient->parish->name}} </span>
+                                <span
+                                    class="text-gray-900">{{ $patient->state->name . ', ' . $patient->municipality->name . ', ' . $patient->parish->name }}
+                                </span>
                             </div>
                         </div>
                         <div class="row mb-5">
                             <label class="col-lg-4 fw-semibold text-warning">Sector</label>
                             <div class="col-lg-8 d-flex align-items-center">
-                                <span class="text-gray-900">{{ ucwords($patient->sector)}} </span>
+                                <span class="text-gray-900">{{ ucwords($patient->sector) }} </span>
                             </div>
                         </div>
                     </div>
                 </div>
             @endif
 
-            <div class="card mb-5 mb-xl-10">
-                <div class="card-header cursor-pointer">
-                    <div class="card-title m-0">
-                        <h3 class="fw-bold text-warning m-0">Cambiar Contraseña</h3>
+            @if ($user->role->level < 3 || $user->role->level == 10)
+                <div class="card mb-5 mb-xl-10">
+                    <div class="card-header cursor-pointer">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold text-warning m-0">Cambiar Contraseña</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-9">
+                        <form action="{{ route('profile.password.update') }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <div class="row mb-3">
+                                <div class="fv-row">
+                                    <label for="current_password"
+                                        class="form-label fw-bold text-warning required">Contraseña
+                                        actual</label>
+                                    <input name="current_password" type="password" class="form-control form-control-solid"
+                                        placeholder="Contraseña actual" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="fv-row">
+                                    <label for="new_password" class="form-label fw-bold text-warning required">Nueva
+                                        Contraseña</label>
+                                    <input name="new_password" type="password" class="form-control form-control-solid"
+                                        placeholder="Nueva Contraseña" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="fv-row">
+                                    <label for="confirm_password" class="form-label fw-bold text-warning required">Confirmar
+                                        Contraseña</label>
+                                    <input name="confirm_password" type="password" class="form-control form-control-solid"
+                                        placeholder="Confirmar Contraseña" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 text-center mt-5">
+                                <div class="fv-row">
+                                    <button type="submit"
+                                        class="btn btn-warning btn-active-light-warning fw-bold">Actualizar</button>
+                                </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="card-body p-9">
-                    <form action="{{ route('profile.password.update') }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                        <div class="row mb-3">
-                            <div class="fv-row">
-                                <label for="current_password" class="form-label fw-bold text-warning required">Contraseña
-                                    actual</label>
-                                <input name="current_password" type="password" class="form-control form-control-solid"
-                                    placeholder="Contraseña actual" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="fv-row">
-                                <label for="new_password" class="form-label fw-bold text-warning required">Nueva
-                                    Contraseña</label>
-                                <input name="new_password" type="password" class="form-control form-control-solid"
-                                    placeholder="Nueva Contraseña" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="fv-row">
-                                <label for="confirm_password" class="form-label fw-bold text-warning required">Confirmar
-                                    Contraseña</label>
-                                <input name="confirm_password" type="password" class="form-control form-control-solid"
-                                    placeholder="Confirmar Contraseña" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3 text-center mt-5">
-                            <div class="fv-row">
-                                <button type="submit"
-                                    class="btn btn-warning btn-active-light-warning fw-bold">Actualizar</button>
-                            </div>
-                    </form>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
