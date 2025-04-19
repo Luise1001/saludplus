@@ -49,6 +49,10 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
+        if($user->role->level > 2 || $user->role->level < 10){
+            return redirect()->back()->withErrors('La contraseña de este usuario solo puede ser modificada por un administrador.');
+        }
+
         if (!password_verify($request->current_password, $user->password)) {
             return redirect()->back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
         }
