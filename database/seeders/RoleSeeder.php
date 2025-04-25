@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 
@@ -23,20 +22,20 @@ class RoleSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'admin',
-            'display_name' => 'Administrador',
+            'name' => 'System_admin',
+            'display_name' => 'Administrador del sistema',
             'level' => 2,
             'color' => 'success',
-            'description' => 'Administrador de hospitales',
+            'description' => 'Administrador del sistema',
             'active' => true
         ]);
 
         Role::create([
-            'name' => 'admin_system',
-            'display_name' => 'admin system',
-            'level' => 2,
+            'name' => 'regional_admin',
+            'display_name' => 'Administrador regional',
+            'level' => 3,
             'color' => 'success',
-            'description' => 'Administrador del sistema',
+            'description' => 'Administrador regional de hospitales',
             'active' => true
         ]);
 
@@ -47,7 +46,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'president',
             'display_name' => 'Presidente',
-            'level' => 3,
+            'level' => 4,
             'color' => 'success',
             'description' => 'Director del hospital',
             'active' => true
@@ -56,7 +55,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'supervisor',
             'display_name' => 'Supervisor',
-            'level' => 4,
+            'level' => 5,
             'color' => 'success',
             'description' => 'Supervisor del sistema',
             'active' => true
@@ -65,7 +64,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'assistant',
             'display_name' => 'Asistente administrativo',
-            'level' => 5,
+            'level' => 6,
             'color' => 'success',
             'description' => 'Asistente administrativo del hospital',
             'active' => true
@@ -74,7 +73,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'doctor',
             'display_name' => 'Doctor',
-            'level' => 6,
+            'level' => 7,
             'color' => 'success',
             'description' => 'Doctor del hospital',
             'active' => true
@@ -83,7 +82,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'nurse',
             'display_name' => 'Enfermero',
-            'level' => 7,
+            'level' => 8,
             'color' => 'success',
             'description' => 'Enfermero del hospital',
             'active' => true
@@ -92,7 +91,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'receptionist',
             'display_name' => 'Recepcionista',
-            'level' => 7,
+            'level' => 9,
             'color' => 'success',
             'description' => 'Recepcionista del hospital',
             'active' => true

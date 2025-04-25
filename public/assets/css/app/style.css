@@ -12,8 +12,13 @@
     color: #FF8600D1 !important;
 }
 
+.form-check-input{
+    background-color: #383b3e !important;
+    border-color: #FF8600D1 !important;
+}
+
 .form-check-input:checked {
-    background-color: #FF8600D1;
+    background-color: #FF8600D1 !important;
     border-color: #FF8600D1;
 }
 

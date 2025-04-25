@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Hospital\ScheduleRequest;
 use App\Models\Administration\MedicalSchedule;
 use App\Models\Administration\MedicalArea;
+use App\Models\Administration\MedicalCenterArea;
 
 class HospitalScheduleController extends Controller
 {
@@ -28,9 +29,18 @@ class HospitalScheduleController extends Controller
 
     public function create()
     {
+        $medical_center_id = session('medical_center_id');
+
+        if (!$medical_center_id) {
+            return redirect()->back()->withErrors('No cuenta con un centro médico asignado');
+        }
+
         $hours = hours(24);
         $days = days();
-        $areas = MedicalArea::select('id', 'name')->get();
+        $MedicalCenterArea = MedicalCenterArea::with('medicalArea')->where('medical_center_id', $medical_center_id)->get();
+        $areas = $MedicalCenterArea->map(function ($medicalCenter) {
+            return $medicalCenter->medicalArea;
+        });
 
         return view('app.hospital.schedule.create', [
             'hours' => $hours,
@@ -90,7 +100,10 @@ class HospitalScheduleController extends Controller
         $schedule = MedicalSchedule::find($id);
         $hours = hours(24);
         $days = days();
-        $areas = MedicalArea::select('id', 'name')->get();
+        $MedicalCenterArea = MedicalCenterArea::with('medicalArea')->where('medical_center_id', $medical_center_id)->get();
+        $areas = $MedicalCenterArea->map(function ($medicalCenter) {
+            return $medicalCenter->medicalArea;
+        });
 
         return view('app.hospital.schedule.edit', [
             'schedule' => $schedule,

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Permission;
 use App\Models\Role;
@@ -58,7 +57,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Áreas de atención',
                 'description' => 'Gestionar las áreas de atención del sistema',
                 'active' => true,
-                'level' => 2,
+                'level' => 3,
             ],
             [
                 'menu_id' => 3,
@@ -67,16 +66,16 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Especialistas',
                 'description' => 'Gestionar los especialistas del sistema',
                 'active' => true,
-                'level' => 2,
+                'level' => 3,
             ],
             [
                 'menu_id' => 3,
                 'route' => 'medical.schedule.index',
                 'name' => 'medical.schedule.manage',
                 'display_name' => 'Horarios',
-                'description' => 'Gestionar los horarios de atención del hospital',
+                'description' => 'Gestionar los horarios de los hospitales',
                 'active' => true,
-                'level' => 2,
+                'level' => 3,
             ],
             [
                 'menu_id' => 3,
@@ -91,10 +90,10 @@ class PermissionSeeder extends Seeder
                 'menu_id' => 3,
                 'route' => 'hospital.reservation.index',
                 'name' => 'hospital.reservation.manage',
-                'display_name' => 'Citas',
+                'display_name' => 'Control de citas',
                 'description' => 'Gestionar las citas médicas del hospital',
                 'active' => true,
-                'level' => 7,
+                'level' => 8,
             ],
             [
                 'menu_id' => 5,
@@ -103,7 +102,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Centro médico',
                 'description' => 'Configurar el centro médico al que pertenece el usuario',
                 'active' => true,
-                'level' => 3,
+                'level' => 4,
             ],
             [
                 'menu_id' => 3,
@@ -112,7 +111,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Especialistas',
                 'description' => 'Gestionar los especialistas del hospital',
                 'active' => true,
-                'level' => 3,
+                'level' => 4,
             ],
             [
                 'menu_id' => 3,
@@ -121,7 +120,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Horarios',
                 'description' => 'Gestionar los horarios del hospital',
                 'active' => true,
-                'level' => 3,
+                'level' => 4,
             ],
             [
                 'menu_id' => 3,
@@ -130,7 +129,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Usuarios',
                 'description' => 'Gestionar los usuarios del personal del hospital',
                 'active' => true,
-                'level' => 3,
+                'level' => 4,
             ],
             [
                 'menu_id' => 2,
