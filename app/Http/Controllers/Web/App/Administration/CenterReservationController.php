@@ -131,7 +131,7 @@ class CenterReservationController extends Controller
 
         $reservation->update([
             'status' => 3,
-            'observation' => 'Cancelada por el hospital',
+            'observation' => $reservation->obseration. ' Cancelada por el hospital',
             'user_id' => auth()->user()->id,
         ]);
 

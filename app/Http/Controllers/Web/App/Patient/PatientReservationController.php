@@ -100,7 +100,7 @@ class PatientReservationController extends Controller
 
         $reservation->update([
             'status' => 3,
-            'observation' => 'Cancelada por el paciente',
+            'observation' => $reservation->observation. ' Cancelada por el paciente',
             'user_id' => auth()->user()->id,
         ]);
 

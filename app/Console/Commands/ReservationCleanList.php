@@ -37,7 +37,7 @@ class ReservationCleanList extends Command
                 $row->update([
                     'status' => 3,
                     'user_id' => 1,
-                    'observation' => 'Cancelada por el sistema'
+                    'observation' => $row->observation. ' Cancelada por el sistema'
                 ]);
             }
         }
