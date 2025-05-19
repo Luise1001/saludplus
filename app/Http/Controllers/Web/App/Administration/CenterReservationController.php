@@ -101,7 +101,7 @@ class CenterReservationController extends Controller
         }
 
         $reservation->update([
-            'status' => 'procesado',
+            'status' => 2,
             'user_id' => auth()->user()->id,
         ]);
 
@@ -130,7 +130,7 @@ class CenterReservationController extends Controller
         }
 
         $reservation->update([
-            'status' => 'cancelado',
+            'status' => 3,
             'user_id' => auth()->user()->id,
         ]);
 
