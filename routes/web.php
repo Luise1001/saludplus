@@ -148,6 +148,10 @@ Route::middleware([
         Route::get('/personal/editar/id={id}/asignar-centro', [MedicalCenterStaffController::class, 'assign'])->name('staff.assign');
     });
 
+    /*******************************************************************************************************************************************
+     * Registered patient routes
+     *******************************************************************************************************************************************/
+
     /**
      * Patient reservation history
      */
@@ -156,6 +160,9 @@ Route::middleware([
         ->middleware('check.user.permission:patient.reservation.history');
 
         Route::get('/pacientes/paciente/filtrar-citas', [PatientReservationController::class, 'filter'])->name('patient.reservation.history.filter')
+        ->middleware('check.user.permission:patient.reservation.history');
+
+        Route::post('/pacientes/paciente/cancelar-cita', [PatientReservationController::class, 'cancel'])->name('patient.reservation.cancel')
         ->middleware('check.user.permission:patient.reservation.history');
 
         Route::get('/pacientes/paciente/reservar-cita', [PatientReservationController::class, 'reserve'])->name('patient.reservation.reserve')

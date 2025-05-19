@@ -43,5 +43,5 @@
 
 
 @section('scripts')
-    <script src="{{ asset('assets/js/app/hospital/reservation/index.js') }}"></script>
+    <script src="{{ asset('assets/js/app/patients/reservation-history/index.js') }}"></script>
 @endsection

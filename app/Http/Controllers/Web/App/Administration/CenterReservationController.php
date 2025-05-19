@@ -126,11 +126,12 @@ class CenterReservationController extends Controller
         $reservation = Reservation::find($request->id);
 
         if ($reservation->status != 'pendiente') {
-            return redirect()->back()->withErrors('La cita ya ha sido procesada.');
+            return redirect()->back()->withErrors('No se pudo cancelar la cita, porque ya ha sido procesada.');
         }
 
         $reservation->update([
             'status' => 3,
+            'observation' => 'Cancelada por el hospital',
             'user_id' => auth()->user()->id,
         ]);
 

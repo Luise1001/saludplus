@@ -72,6 +72,41 @@ class PatientReservationController extends Controller
         ]);
     }
 
+    public function cancel(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:reservations,id',
+        ], [
+            'id.required' => 'El ID es requerido.',
+            'id.exists' => 'El ID no existe en la base de datos.'
+        ]);
+
+        $user = Auth::user();
+        $patient = Patient::where('user_id', $user->id)->first();
+
+        if (!$patient) {
+            return redirect()->route('patient.index')->withSuccess('Bienvenido al registro de pacientes, por favor ingrese su información.');
+        }
+
+        $reservation = Reservation::where('id', $request->id)->where('patient_id', $patient->id)->first();
+
+        if (!$reservation) {
+            return redirect()->back()->withErrors('No se encontró la cita seleccionada.');
+        }
+
+        if ($reservation->status != 'pendiente') {
+            return redirect()->back()->withErrors('No se pudo cancelar la cita, porque ya ha sido procesada.');
+        }
+
+        $reservation->update([
+            'status' => 3,
+            'observation' => 'Cancelada por el paciente',
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->back()->withSuccess('Cita cancelada correctamente.');
+    }
+
     public function reserve()
     {
         $user = Auth::user();

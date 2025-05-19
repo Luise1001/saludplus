@@ -10,6 +10,7 @@
                 <th class="text-warning">Hora</th>
                 <th class="text-warning">Observación</th>
                 <th class="text-warning">Estatus</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -50,6 +51,23 @@
                                 <span class="badge badge-danger fw-bold">{{ ucfirst($row->status) }} </span>
                             @else
                                 <span class="badge badge-gray-900 fw-bold">{{ ucfirst($row->status) }} </span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($row->status == 'pendiente')
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
+                                    <form action="{{ route('patient.reservation.cancel') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $row->id }}">
+                                        <button reservation="{{ $row }}"
+                                            class="btn-cancel btn btn-sm btn-icon btn-active-light-danger me-1">
+                                            <i class="ki-duotone ki-cross-circle fs-3">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </button>
+                                    </form>
+                                </div>
                             @endif
                         </td>
                     </tr>
