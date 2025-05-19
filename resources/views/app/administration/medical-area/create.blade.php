@@ -18,11 +18,11 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold">Crear área de atención</h2>
+                <h2 class="fw-bold text-warning">Crear área de atención</h2>
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('medical.area.index') }}"class="btn btn-sm btn-primary btn-active-light-primary">
+                <a href="{{ route('medical.area.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     Listado
                 </a>
             </div>
@@ -36,7 +36,7 @@
                     @csrf
                     <div class="row mb-5">
                         <div class="fv-row">
-                            <label for="name" class="form-label required fs-5 fw-semibold mb-2">Nombre</label>
+                            <label for="name" class="form-label text-warning required fs-5 fw-semibold mb-2">Nombre</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Nombre"
                                 name="name" />
                         </div>
@@ -44,7 +44,7 @@
 
                     <div class="row mb-5">
                         <div class="fv-row">
-                            <label for="description" class="form-label required fs-5 fw-semibold mb-2">Descripción</label>
+                            <label for="description" class="form-label text-warning required fs-5 fw-semibold mb-2">Descripción</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Descripción"
                                 name="description" />
                         </div>
@@ -61,7 +61,7 @@
                     <div class="separator mb-5"></div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+                        <button type="submit" class="btn btn-warning btn-active-light-warning" id="kt_careers_submit_button">
                             Guardar
                         </button>
                     </div>

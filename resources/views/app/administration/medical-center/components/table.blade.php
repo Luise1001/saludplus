@@ -2,15 +2,15 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Rif</th>
-                <th>Activo</th>
-                <th>Estado</th>
-                <th>Municipio</th>
-                <th>Parroquia</th>
-                <th>Fecha</th>
-                <th class="text-end">Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">Rif</th>
+                <th class="text-warning">Activo</th>
+                <th class="text-warning">Estado</th>
+                <th class="text-warning">Municipio</th>
+                <th class="text-warning">Parroquia</th>
+                <th class="text-warning">Fecha</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -48,7 +48,7 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                             <div class="d-flex justify-content-end">
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                     <a href="{{ route('medical.center.edit', ['id' => $row->id]) }}"
@@ -61,13 +61,16 @@
                                 </div>
 
                                 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Configuración">
-                                    <a href="{{ route('medical.center.setting.index', ['id' => $row->id]) }}"
-                                        class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
-                                        <i class="ki-duotone ki-setting-2 fs-2">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                    </a>
+                                    <form action="{{ route('medical.center.setting.index') }}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $row->id }}">
+                                        <button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="submit">
+                                            <i class="ki-duotone ki-setting-2 fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>

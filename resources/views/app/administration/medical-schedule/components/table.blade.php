@@ -2,15 +2,15 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Centro médico</th>
-                <th>Área</th>
-                <th>Día</th>
-                <th>Hora</th>
-                <th>Cupos</th>
-                <th>Activo</th>
-                <th>Fecha</th>
-                <th class="text-end">Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Centro médico</th>
+                <th class="text-warning">Área</th>
+                <th class="text-warning">Días</th>
+                <th class="text-warning">Hora</th>
+                <th class="text-warning">Cupos</th>
+                <th class="text-warning">Activo</th>
+                <th class="text-warning">Fecha</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -27,7 +27,9 @@
                             <span class="text-gray-900 fw-bold">{{ ucwords($row->medicalArea->name) }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ day($row->day) }} </span>
+                            @foreach ($row->days as $day)
+                                <span class="text-gray-900 fw-bold">{{ day($day) }} </span> <br>
+                            @endforeach
                         </td>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->hour)) }} </span>
@@ -47,9 +49,10 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
-                                <a href="{{ route('medical.schedule.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
+                                <a href="{{ route('medical.schedule.edit', ['id' => $row->id]) }}"
+                                    class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
                                     <i class="ki-duotone ki-pencil fs-3">
                                         <span class="path1"></span>
                                         <span class="path2"></span>

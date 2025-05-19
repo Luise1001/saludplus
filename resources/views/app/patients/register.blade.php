@@ -13,22 +13,22 @@
 
 
 @section('content')
-    @include('app.layouts.components.alerts')
 
-    <div id="kt_app_content" class="app-content flex-column-fluid">
+<div id="kt_app_content" class="app-content flex-column-fluid mt-5">
+        @include('app.layouts.components.alerts')
         <div id="kt_app_content_container" class="app-container container-xxl">
             <div class="card">
-                <div class="card-body p-lg-17">
+                <div class="card-body p-lg-5">
 
-                    <div class="position-relative mb-17">
+                    <div class="position-relative mb-5 mt-5">
                         <div class="overlay overlay-show">
                             <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px"
-                                style="background-image:url('assets/media/stock/1600x800/img-1.jpg')"></div>
+                                style="background-image:url('{{ asset('assets/media/auth/register.png') }}')"></div>
                             <div class="overlay-layer rounded bg-black" style="opacity: 0.4"></div>
                         </div>
 
-                        <div class="position-absolute text-white mb-8 ms-10 bottom-0">
-                            <h3 class="text-white fs-2qx fw-bold mb-3 m">Registro de pacientes</h3>
+                        <div class="position-absolute text-warning mb-8 ms-10 bottom-0">
+                            <h3 class="text-warning fs-2qx fw-bold mb-3 m">Registro de pacientes</h3>
                             <div class="fs-5 fw-semibold">Este formulario solo se solicitará solo una vez para obtener los
                                 datos
                                 necesarios del solicitante.</div>
@@ -43,13 +43,13 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label for="document"
-                                            class="form-label required fs-5 fw-semibold mb-2">Cédula</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Cédula</label>
                                         <input type="text" class="form-control form-control-solid"
                                             placeholder="123456789" name="document" value="{{ $document ?? '' }}" />
                                     </div>
 
                                     <div class="col-md-6 fv-row">
-                                        <label for="birthday" class="form-label required fs-5 fw-semibold mb-2">Fecha de
+                                        <label for="birthday" class="form-label text-warning required fs-5 fw-semibold mb-2">Fecha de
                                             nacimiento</label>
                                         <input type="text" class="form-control form-control-solid"
                                             placeholder="Fecha de nacimiento" id="birthday" name="birthday" />
@@ -59,14 +59,14 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label for="name"
-                                            class="form-label required fs-5 fw-semibold mb-2">Nombres</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Nombres</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Nombres"
                                             name="name" />
                                     </div>
 
                                     <div class="col-md-6 fv-row">
                                         <label for="last_name"
-                                            class="form-label required fs-5 fw-semibold mb-2">Apellidos</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Apellidos</label>
                                         <input type="text" class="form-control form-control-solid"
                                             placeholder="Apellidos" name="last_name" />
                                     </div>
@@ -74,15 +74,15 @@
 
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
-                                        <label for="email" class="form-label required fs-5 fw-semibold mb-2">Correo
-                                            eléctronico</label>
+                                        <label for="email" class="form-label text-warning required fs-5 fw-semibold mb-2">Correo
+                                            electrónico</label>
                                         <input class="form-control form-control-solid" placeholder="ejemplo@ejemplo.com"
                                             name="email" />
                                     </div>
 
                                     <div class="col-md-6 fv-row">
                                         <label for="phone"
-                                            class="form-label required fs-5 fw-semibold mb-2">Teléfono</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Teléfono</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Teléfono"
                                             name="phone" />
                                     </div>
@@ -90,14 +90,14 @@
 
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
-                                        <label for="age" class="form-label required fs-5 fw-semibold mb-2">Edad</label>
+                                        <label for="age" class="form-label text-warning required fs-5 fw-semibold mb-2">Edad</label>
                                         <input type="text" class="form-control form-control-solid" placeholder="Edad"
                                             name="age" />
                                     </div>
 
                                     <div class="col-md-6 fv-row">
                                         <label for="state_id"
-                                            class="form-label required fs-5 fw-semibold mb-2">Estádo</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Estádo</label>
                                         <select name="state_id" class="form-select form-select-solid">
                                             <option value="">Seleccionar</option>
                                             @if (isset($states) && $states->count() > 0)
@@ -112,7 +112,7 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label for="municipality_id"
-                                            class="form-label required fs-5 fw-semibold mb-2">Municipio</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Municipio</label>
                                         <select name="municipality_id" class="form-select form-select-solid">
                                             <option value="">Seleccionar</option>
                                             @if (isset($municipalities) && $municipalities->count() > 0)
@@ -125,7 +125,7 @@
 
                                     <div class="col-md-6 fv-row">
                                         <label for="parish_id"
-                                            class="form-label required fs-5 fw-semibold mb-2">Parroquia</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Parroquia</label>
                                         <select name="parish_id" class="form-select form-select-solid">
                                             <option value="">Seleccionar</option>
                                             @if (isset($parishes) && $parishes->count() > 0)
@@ -140,7 +140,7 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6 fv-row">
                                         <label for="sector"
-                                            class="form-label required fs-5 fw-semibold mb-2">Sector</label>
+                                            class="form-label text-warning required fs-5 fw-semibold mb-2">Sector</label>
                                         <input type="text" class="form-control form-control-solid"
                                             placeholder="Sector" name="sector" />
                                     </div>
@@ -149,7 +149,7 @@
                                 <div class="separator mb-8"></div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+                                    <button type="submit" class="btn btn-warning btn-active-light-warning text-white fw-bold" id="kt_careers_submit_button">
                                         Guardar
                                     </button>
                                 </div>

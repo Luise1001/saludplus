@@ -19,11 +19,11 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold">Editar rol</h2>
+                <h2 class="fw-bold text-warning">Editar rol</h2>
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('role.index') }}"class="btn btn-sm btn-primary btn-active-light-primary">
+                <a href="{{ route('role.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     Listado
                 </a>
             </div>
@@ -39,13 +39,13 @@
                     <div class="row mb-5">
                         <div class="col-md-6 fv-row">
                             <input type="hidden" name="id" value="{{ $role->id }}" />
-                            <label for="name" class="form-label required fs-5 fw-semibold mb-2">Nombre</label>
+                            <label for="name" class="form-label text-warning required fs-5 fw-semibold mb-2">Nombre</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Nombre"
                                 name="name" value="{{ $role->name }}" />
                         </div>
 
                         <div class="col-md-6 fv-row">
-                            <label class="form-label required fs-5 fw-semibold mb-2">Nombre para mostrar</label>
+                            <label class="form-label text-warning required fs-5 fw-semibold mb-2">Nombre para mostrar</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Nombre para mostrar"
                                 name="display_name" value="{{ $role->display_name }}" />
                         </div>
@@ -53,7 +53,7 @@
 
                     <div class="row mb-5">
                         <div class="col-md-6 fv-row">
-                            <label for="level" class="form-label required fs-5 fw-semibold mb-2">Nivel</label>
+                            <label for="level" class="form-label text-warning required fs-5 fw-semibold mb-2">Nivel</label>
                             <select name="level" class="form-select form-select-solid">
                                 @for($i = auth()->user()->role->level;  $i <= 10; $i++)
                                     <option {{ $role->level == $i ? 'selected' : '' }} value="{{ $i }}">{{ $i }}</option>
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="col-md-6 fv-row">
-                            <label for="color" class="form-label required fs-5 fw-semibold mb-2">Color</label>
+                            <label for="color" class="form-label text-warning required fs-5 fw-semibold mb-2">Color</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Color"
                                 name="color" value="{{ $role->color }}" />
                         </div>
@@ -70,7 +70,7 @@
 
                     <div class="row mb-5">
                         <div class="fv-row">
-                            <label for="description" class="form-label fs-5 fw-semibold mb-2">Descripción</label>
+                            <label for="description" class="form-label text-warning fs-5 fw-semibold mb-2">Descripción</label>
                             <input class="form-control form-control-solid" placeholder="Descripción" name="description" value="{{ $role->description }}" />
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="separator mb-5"></div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+                        <button type="submit" class="btn btn-warning btn-active-light-warning" id="kt_careers_submit_button">
                             Guardar
                         </button>
                     </div>

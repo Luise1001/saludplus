@@ -2,10 +2,10 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">Descripción</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -39,6 +39,9 @@
     </table>
 
     <div class="card-body text-center">
-        <button type="submit" form="form_area" class="btn btn-md btn-primary btn-active-light-primary">Guardar</button>
+        @if (isset($areas) && $areas->count() > 0)
+            <button type="submit" form="form_area"
+                class="btn btn-md btn-warning btn-active-light-warning">Guardar</button>
+        @endif
     </div>
 </div>

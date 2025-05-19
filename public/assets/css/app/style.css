@@ -1,0 +1,29 @@
+[data-bs-theme="light"] .bg-body {
+    background-color: #0E3B73 !important;
+}
+
+#kt_app_header_container {
+    background-color: #0E3B73 !important;
+}
+
+.app-sidebar-menu,
+.app-sidebar-logo {
+    background-color: #0E3B73 !important;
+    color: #FF8600D1 !important;
+}
+
+.form-check-input{
+    background-color: #383b3e !important;
+    border-color: #FF8600D1 !important;
+}
+
+.form-check-input:checked {
+    background-color: #FF8600D1 !important;
+    border-color: #FF8600D1;
+}
+
+/*
+--primary-blue: #0E3B73;
+ --secondary-blue: #1e4679
+--primary-orange: #FF8600D1;
+*/

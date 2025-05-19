@@ -1,4 +1,4 @@
-@extends('app.layouts.index')
+@extends('app.layouts.index-auth')
 
 @section('styles')
     <style>
@@ -18,18 +18,17 @@
 
             <div class="d-flex flex-lg-row-fluid">
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
-                    <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{{ asset('assets/media/auth/agency.png') }}" alt="" />
+                    <img class="theme-light-show mx-auto mw-100 w-200px w-lg-300px mb-10 mb-lg-20"
+                        src="{{ asset('assets/media/auth/doctors.png') }}" alt="" />
                     <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                        src="{{ asset('assets/media/auth/agency-dark.png') }}" alt="" />
-                    <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Fast, Efficient and Productive</h1>
+                        src="{{ asset('assets/media/auth/doctors.png') }}" alt="" />
+                    <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Rápido, Eficiente y Productivo</h1>
 
-                    <div class="text-gray-600 fs-base text-center fw-semibold">In this kind of post,
-                        <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>introduces a person
-                        they’ve interviewed
-                        <br />and provides some background information about
-                        <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>and their
-                        <br />work following this is a transcript of the interview.
+                    <div class="text-gray-600 fs-base text-center fw-semibold">
+                        <p class="mb-5">Salud Plus es un sistema de gestión de citas médicas que permite a los pacientes
+                            agendar citas con médicos de manera rápida y eficiente.</p>
+                        <p class="mb-5">Con una interfaz intuitiva y fácil de usar, los pacientes pueden buscar médicos
+                            por especialidad, disponibilidad y ubicación.</p>
                     </div>
                 </div>
             </div>
@@ -46,22 +45,24 @@
                                 data-kt-redirect-url="{{ route('app.index') }}">
                                 @csrf
                                 <div class="text-center mb-10">
-                                    <h1 class="text-gray-900 fw-bolder mb-3">Olvidó su contraseña?</h1>
-                                    <div class="text-gray-500 fw-semibold fs-6">Ingrese su correo eléctronico para restablecer su contraseña.
+                                    <img alt="Logo" src="{{ asset('assets/media/svg/saludplus/icon_text_orange.svg') }}" class="h-50px" />
+
+                                    <h1 class="text-warning fw-bolder mb-3 mt-5">Olvidó su contraseña?</h1>
+                                    <div class="text-warning fw-semibold fs-6">Ingrese su correo electrónico para restablecer su contraseña.
                                     </div>
                                 </div>
 
                                 <div class="fv-row mb-8">
-                                    <label for="email" class="form-label required fs-5 fw-bold">Correo eléctronico</label>
-                                    <input type="text" placeholder="Correo eléctronico" name="email" autocomplete="off"
-                                        class="form-control bg-transparent" />
+                                    <label for="email" class="form-label text-warning required fs-5 fw-bold">Correo electrónico</label>
+                                    <input type="text" placeholder="Correo electrónico" name="email" autocomplete="off"
+                                        class="form-control" />
                                 </div>
 
                                 <div class="d-flex flex-wrap justify-content-center pb-lg-0">
 
-                                    <a href="{{ route('login') }}" class="btn btn-light me-3">Cancelar</a>
+                                    <a href="{{ route('login') }}" class="btn btn-light text-warning me-3">Cancelar</a>
 
-                                    <button type="submit" id="kt_password_reset_submit" class="btn btn-primary me-4">
+                                    <button type="submit" id="kt_password_reset_submit" class="btn btn-warning btn-active-light-warning me-4">
                                         <span class="indicator-label">Enviar</span>
                                         <span class="indicator-progress">Por favor espere...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

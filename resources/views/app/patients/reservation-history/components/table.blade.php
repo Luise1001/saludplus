@@ -2,15 +2,15 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Paciente</th>
-                <th>Doctor</th>
-                <th>Motivo</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Observación</th>
-                <th>Estatus</th>
-                <th class="text-end">Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Área</th>
+                <th class="text-warning">Doctor</th>
+                <th class="text-warning">Motivo</th>
+                <th class="text-warning">Fecha</th>
+                <th class="text-warning">Hora</th>
+                <th class="text-warning">Observación</th>
+                <th class="text-warning">Estatus</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -21,9 +21,7 @@
                             <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                         </td>
                         <td>
-                            <span
-                                class="text-gray-900 fw-bold">{{ ucwords($row->patient->name . ' ' . $row->patient->last_name) }}
-                            </span>
+                            <span class="text-gray-900 fw-bold">{{ $row->medicalArea->name }} </span>
                         </td>
                         <td>
                             <span
@@ -38,7 +36,7 @@
                         </td>
                         <td>
                             <span
-                                class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->MedicalSchedule->hour)) }}
+                                class="text-gray-900 fw-bold">{{ date('h:i A', strtotime($row->medicalSchedule->hour)) }}
                             </span>
                         </td>
                         <td>
@@ -55,28 +53,20 @@
                                 <span class="badge badge-gray-900 fw-bold">{{ ucfirst($row->status) }} </span>
                             @endif
                         </td>
-                        <td class="text-end">
+                        <td>
                             @if ($row->status == 'pendiente')
-                                <div class="d-flex justify-content-end">
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Confirmar">
-                                        <a href="{{ route('center.reservation.confirm', ['id' => $row->id]) }}"
-                                            class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
-                                            <i class="ki-duotone ki-double-check fs-3">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                    </div>
-
-                                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
-                                        <a href="{{ route('center.reservation.cancel', ['id' => $row->id]) }}"
-                                            class="btn btn-sm btn-icon btn-active-light-danger me-1" type="button">
+                                <div data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
+                                    <form action="{{ route('patient.reservation.cancel') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $row->id }}">
+                                        <button reservation="{{ $row }}"
+                                            class="btn-cancel btn btn-sm btn-icon btn-active-light-danger me-1">
                                             <i class="ki-duotone ki-cross-circle fs-3">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                             </i>
-                                        </a>
-                                    </div>
+                                        </button>
+                                    </form>
                                 </div>
                             @endif
                         </td>

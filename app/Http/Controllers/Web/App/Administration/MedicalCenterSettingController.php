@@ -8,12 +8,17 @@ use App\Models\Administration\MedicalCenter;
 use App\Models\Administration\MedicalArea;
 use App\Models\Administration\Doctor;
 use App\Models\Administration\MedicalSchedule;
+use App\Models\Administration\MedicalCenterStaff;
 
 class MedicalCenterSettingController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
-        $request->merge(['id' => $id]);
+        if(!$request->id && auth()->user()->medicalCenter){
+            $request->merge([
+                'id' => auth()->user()->medicalCenter->id
+            ]);
+        }
 
         $request->validate([
             'id' => 'required|exists:medical_centers,id'
@@ -22,16 +27,26 @@ class MedicalCenterSettingController extends Controller
             'id.exists' => 'El centro médico no existe'
         ]);
 
-        $center = MedicalCenter::with('medicalAreas', 'doctors')->where('id', $id)->first();
+        $center = MedicalCenter::with('medicalAreas', 'doctors')->where('id', $request->id)->first();
         $areas = MedicalArea::where('active', 1)->get();
         $doctors = Doctor::where('active', 1)->whereIn('medical_area_id', $center->medicalAreas->pluck('id'))->get();
-        $schedules = MedicalSchedule::where('active', 1)->where('medical_center_id', $id)->get();
+        $schedules = MedicalSchedule::where('active', 1)->where('medical_center_id', $request->id)->get();
+        $staff = MedicalCenterStaff::with(['staff' => function ($query) {
+            $query->whereHas('role', function ($q) {
+                $q->where('level', '>', auth()->user()->role->level);
+            });
+        }])->where('medical_center_id', $request->id)->get();
+
+        $users = $staff->filter(function ($user) {
+            return $user->staff;
+        });
 
         return view('app.administration.medical-center.setting.index', [
             'center' => $center,
             'areas' => $areas,
             'doctors' => $doctors,
             'schedules' => $schedules,
+            'users' => $users,
         ]);
     }
 

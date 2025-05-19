@@ -2,14 +2,14 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Nivel</th>
-                <th>Color</th>
-                <th>Activo</th>
-                <th>Descripción</th>
-                <th>Fecha</th>
-                <th class="text-end">Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">Nivel</th>
+                <th class="text-warning">Color</th>
+                <th class="text-warning">Activo</th>
+                <th class="text-warning">Descripción</th>
+                <th class="text-warning">Fecha</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -20,7 +20,7 @@
                             <span class="text-gray-900 fw-bold">{{ $row->id }} </span>
                         </td>
                         <td>
-                            <span class="text-gray-900 fw-bold">{{ Str::upper($row->display_name) }} </span>
+                            <span class="text-gray-900 fw-bold">{{ ucwords($row->display_name) }} </span>
                         </td>
                         <td>
                             <span class="text-gray-900 fw-bold">{{ $row->level }} </span>
@@ -43,7 +43,7 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                         <div class="d-flex justify-content-end">
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                 <a href="{{ route('role.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">

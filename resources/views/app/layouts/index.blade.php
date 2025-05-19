@@ -16,10 +16,11 @@
     <meta property="og:site_name" content="Metronic by Keenthemes" />
 
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/app/style.css') }}" rel="stylesheet" type="text/css" />
     <script>
         if (window.top != window.self) {
             window.top.location.replace(window.self.location.href);
@@ -58,8 +59,11 @@
             @yield('header')
             @yield('sidebar')
 
-            <div id="kt_app_content" class="app-content flex-column-fluid">
-                <div id="kt_app_content_container" class="app-container container-xxl">
+            <div id="kt_app_content" class="app-content flex-column-fluid mt-3">
+                <div id="kt_app_content_container" class="app-container">
+                    @if (session('medical_center'))
+                        @include('app.layouts.components.hospital-header')
+                    @endif
                     @yield('content')
                 </div>
             </div>
@@ -69,8 +73,10 @@
         <div id="kt_app_footer" class="app-footer">
             <div class="app-container container-fluid d-flex flex-column flex-md-row flex-end pb-10">
                 <div class="menu text-gray-900 order-2 order-md-1">
-                    <span class="text-muted fw-semibold me-1">{{ now()->format('Y') }} </span>
-                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">SaludPlus</a>
+                    <span class="text-warning fw-semibold me-1 fs-6">{{ now()->format('Y') }} </span>
+                    <a href="{{ route('app.index') }}" target="_blank" class="text-gray-800 text-hover-primary">
+                        <span class="f-6 text-warning">Salud plus</span>
+                    </a>
                 </div>
 
 

@@ -18,11 +18,11 @@
     <div class="card card-flush mb-3 mt-3">
         <div class="card-header">
             <div class="card-title">
-                <h2 class="fw-bold">{{ $role->display_name }} </h2>
+                <h2 class="fw-bold text-warning">{{ $role->display_name }} </h2>
             </div>
 
             <div class="card-toolbar">
-                <a href="{{ route('role.index') }}"class="btn btn-sm btn-primary btn-active-light-primary">
+                <a href="{{ route('role.index') }}"class="btn btn-sm btn-warning btn-active-light-warning">
                     Lista de roles
                 </a>
             </div>

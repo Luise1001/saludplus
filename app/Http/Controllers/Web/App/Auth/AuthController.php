@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Patient\Patient;
 
 class AuthController extends Controller
 {
@@ -50,8 +51,16 @@ class AuthController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'role_id' => 3
+            'role_id' => 10
         ]);
+
+
+        $patient = Patient::where('email', $request->input('email'))->first();
+
+        if ($patient) {
+            
+            $patient->update(['user_id' => $user->id]);
+        }
 
         Auth::login($user);
 

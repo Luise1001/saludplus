@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web\App\Patient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Patient\ReservationRequest;
-use Carbon\Carbon;
 use App\Models\Patient\Patient;
 use App\Models\Patient\Reservation;
 
@@ -37,12 +36,11 @@ class ReservationController extends Controller
         $reservation = Reservation::where('patient_id', $request->patient_id)
             ->where('medical_center_id', $request->medical_center_id)
             ->where('medical_area_id', $request->medical_area_id)
-            ->where('date', $request->date)
             ->where('status', 'pendiente')
             ->first();
 
         if ($reservation) {
-            return redirect()->back()->withErrors('Usted ya tiene una cita pendiente para esta fecha.');
+            return redirect()->back()->withErrors('Usted ya tiene una cita pendiente para este centro médico en esa área.');
         }
 
         $new = Reservation::create($request->validated());
@@ -61,21 +59,9 @@ class ReservationController extends Controller
             'medicalSchedule'
         ])->find($new->id);
 
-        return redirect()->route('reservation.sheet')->withSuccess('Cita agendada con éxito.')->with([
-            'reservation' => $reservation
-        ]);
-    }
-
-    public function sheet()
-    {
-        $reservation = session('reservation');
-
-        if (!$reservation) {
-            return redirect()->route('reservation.index')->withErrors('No se encontró la cita.');
-        }
-
         return view('app.patients.sheet', [
             'reservation' => $reservation
         ]);
     }
+
 }

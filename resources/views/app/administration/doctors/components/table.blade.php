@@ -2,16 +2,16 @@
     <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
         <thead>
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Cédula</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Especialidad</th>
-                <th>Activo</th>
-                <th>Fecha</th>
-                <th class="text-end">Acciones</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Nombres</th>
+                <th class="text-warning">Apellidos</th>
+                <th class="text-warning">Cédula</th>
+                <th class="text-warning">Teléfono</th>
+                <th class="text-warning">Dirección</th>
+                <th class="text-warning">Especialidad</th>
+                <th class="text-warning">Activo</th>
+                <th class="text-warning">Fecha</th>
+                <th class="text-warning">Acciones</th>
             </tr>
         </thead>
         <tbody class="fw-semibold text-gray-600">
@@ -51,7 +51,7 @@
                             <br>
                             <span class="text-muted">{{ $row->created_at->format('H:i:s') }} </span>
                         </td>
-                        <td class="text-end">
+                        <td>
                             <div data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                 <a href="{{ route('doctor.edit', ['id' => $row->id]) }}" class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button">
                                     <i class="ki-duotone ki-pencil fs-3">

@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Role;
+use App\Models\Administration\MedicalCenter;
+use App\Models\Administration\MedicalCenterStaff;
 
 class User extends Authenticatable
 {
@@ -70,5 +72,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function medicalCenter()
+    {
+        return $this->hasOneThrough(MedicalCenter::class, MedicalCenterStaff::class, 'user_id', 'id', 'id', 'medical_center_id');
     }
 }

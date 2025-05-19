@@ -80,9 +80,12 @@ class ReservationForm extends Component
         $this->schedules = MedicalSchedule::where('medical_center_id', $this->medical_center_id)
             ->where('medical_area_id', $this->medical_area_id)
             ->where('active', true)
-            ->where('day', $day)
-            ->get();
+            ->get()
+            ->filter(function ($schedule) use ($day) {
+                return in_array($day, $schedule->days ?? []);
+            });
     }
+
 
     public function loadAvailableDates()
     {
@@ -90,9 +93,12 @@ class ReservationForm extends Component
             ->where('medical_area_id', $this->medical_area_id)->where('active', true)->get();
 
         $schedulesIds = $MedicalSchedules->pluck('id')->toArray();
-        $ScheduleDays = $MedicalSchedules->map(function ($schedule) {
-            return ['day' => $schedule->day, 'schedule_id' => $schedule->id];
-        })->unique()->toArray();
+        $ScheduleDays = [];
+        foreach ($MedicalSchedules as $schedule) {
+            foreach ($schedule->days as $day) {
+                $ScheduleDays[] = ['day' => $day, 'schedule_id' => $schedule->id];
+            }
+        }
 
         $startDate = Carbon::today();
         $endDate = Carbon::today()->addMonth(2);
