@@ -22,8 +22,11 @@ class ReservationRequest extends FormRequest
      */
     public function rules(): array
     {
-        $date = Carbon::parse($this->date)->format('Y-m-d');
-        $this->merge(['date' => $date]);
+        if ($this->has('date')) {
+            $this->merge([
+                'date' => Carbon::parse($this->date)->format('Y-m-d')
+            ]);
+        }
 
         return [
             'patient_id' => ['required', 'numeric', 'exists:patients,id'],

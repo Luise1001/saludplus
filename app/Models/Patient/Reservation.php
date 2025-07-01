@@ -10,6 +10,7 @@ use App\Models\Administration\MedicalArea;
 use App\Models\Administration\Doctor;
 use App\Models\Administration\MedicalSchedule;
 use App\Models\User;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
@@ -57,5 +58,10 @@ class Reservation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getDayAttribute(): string
+    {
+        return Carbon::parse($this->date)->locale('es')->isoFormat('dddd');
     }
 }

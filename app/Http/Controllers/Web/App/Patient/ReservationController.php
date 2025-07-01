@@ -3,65 +3,57 @@
 namespace App\Http\Controllers\Web\App\Patient;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Patient\ReservationRequest;
-use App\Models\Patient\Patient;
-use App\Models\Patient\Reservation;
+use App\Services\Reservations\Contracts\ReservationServiceInterface;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class ReservationController extends Controller
 {
-    public function index(Request $request)
+    public function __construct(
+        protected ReservationServiceInterface $reservationService
+    ) {}
+
+    public function reserve(ReservationRequest $request): RedirectResponse
     {
-        $request->validate([
-            'patient_id' => 'required|numeric|exists:patients,id',
-        ], [
-            'patient_id.required' => 'El paciente es obligatorio',
-            'patient_id.numeric' => 'El paciente solo puede contener números',
-            'patient_id.exists' => 'El paciente no existe',
-        ]);
+        try {
+           $reservation =  $this->reservationService->create($request->validated());
 
-        $patient = Patient::find($request->patient_id);
-
-        if (!$patient) {
-            return redirect()->route('patient.index')->withSuccess('Bienvenido al registro de pacientes, por favor ingrese su información.');
+            return redirect()->route('reservation.sheet', [
+                'reservation' => $reservation->id
+            ])->with('success', 'Cita registrada correctamente.');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        } catch (Throwable $e) {
+            report($e);
+            return redirect()->back()->with('error', 'Ocurrió un error al registrar la cita.');
         }
-
-        return view('app.patients.reservation', [
-            'patient' => $patient,
-        ]);
     }
 
-    public function reserve(ReservationRequest $request)
+    public function confirm(int $id): RedirectResponse
     {
-        $reservation = Reservation::where('patient_id', $request->patient_id)
-            ->where('medical_center_id', $request->medical_center_id)
-            ->where('medical_area_id', $request->medical_area_id)
-            ->where('status', 'pendiente')
-            ->first();
-
-        if ($reservation) {
-            return redirect()->back()->withErrors('Usted ya tiene una cita pendiente para este centro médico en esa área.');
+        try {
+            $this->reservationService->confirm($id);
+            return redirect()->back()->with('success', 'Cita confirmada correctamente.');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        } catch (Throwable $e) {
+            report($e);
+            return redirect()->back()->with('error', 'Error al confirmar la cita.');
         }
-
-        $new = Reservation::create($request->validated());
-
-        $reservation = Reservation::with([
-            'patient',
-            'patient.state',
-            'patient.municipality',
-            'patient.parish',
-            'medicalCenter',
-            'medicalCenter.state',
-            'medicalCenter.municipality',
-            'medicalCenter.parish',
-            'medicalArea',
-            'doctor',
-            'medicalSchedule'
-        ])->find($new->id);
-
-        return view('app.patients.sheet', [
-            'reservation' => $reservation
-        ]);
     }
 
+    public function cancel(int $id): RedirectResponse
+    {
+        try {
+            $this->reservationService->cancel($id, 'Cancelada por el paciente.');
+            return redirect()->back()->with('success', 'Cita cancelada.');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        } catch (Throwable $e) {
+            report($e);
+            return redirect()->back()->with('error', 'Error al cancelar la cita.');
+        }
+    }
 }

@@ -103,6 +103,8 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     @yield('scripts')
+
+    @include('app.layouts.components.loader')
 </body>
 
 </html>

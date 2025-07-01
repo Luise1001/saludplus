@@ -22,7 +22,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('reservation.index')->with('success', 'Bienvenido de nuevo!');
+            $patient = Patient::first();
+            return redirect()->route('reservation.index', ['patient' => $patient->id])->with('success', 'Bienvenido de nuevo!');
         }
 
         return back()->withErrors('Las credenciales proporcionadas son incorrectas.');

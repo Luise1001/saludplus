@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('document')->unique();
             $table->string('phone');
             $table->string('address');
-            $table->unsignedBigInteger('medical_area_id');
+            $table->foreignId('medical_area_id')->constrained('medical_areas')->onDelete('cascade');
             $table->boolean('active')->default(false);
             $table->timestamps();
         });

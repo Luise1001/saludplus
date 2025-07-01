@@ -28,7 +28,7 @@
                 <div class="py-3 d-flex flex-stack flex-wrap">
                     <div class="d-flex align-items-center collapsible rotate">
 
-                        <img src="{{ asset('favicon_io/favicon-32x32.png') }}" class="w-40px me-3"
+                        <img src="{{ asset('assets/media/favicon_io/favicon-32x32.png') }}" class="w-40px me-3"
                             alt="" />
 
                         <div class="me-3">
@@ -103,7 +103,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-warning min-w-125px w-125px">Día</td>
-                                    <td class="text-gray-800">{{ $reservation->MedicalSchedule->day }} </td>
+                                    <td class="text-gray-800">{{ $reservation->day }} </td>
                                 </tr>
                                 <tr>
                                     <td class="text-warning min-w-125px w-125px">Hora</td>
