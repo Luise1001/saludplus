@@ -54,7 +54,7 @@
 
                     <div class="d-flex flex-column flex-lg-row mb-5">
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
-                            @livewire('app.patients.reservation-form', ['patient' => $patient])
+                            @livewire('app.patients.reservation-selector', ['patient' => $patient])
                         </div>
                     </div>
                 </div>

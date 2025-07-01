@@ -7,7 +7,10 @@ use App\Http\Controllers\Web\App\RoleController;
 use App\Http\Controllers\Web\App\PermissionController;
 use App\Http\Controllers\Web\App\Auth\AuthController;
 use App\Http\Controllers\Web\App\Patient\PatientController;
+use App\Http\Controllers\Web\App\Patient\PatientPageController;
 use App\Http\Controllers\Web\App\Patient\ReservationController;
+use App\Http\Controllers\Web\App\Patient\ReservationPageController;
+use App\Http\Controllers\Web\App\Patient\ReservationSheetController;
 use App\Http\Controllers\Web\App\ProfileController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterController;
 use App\Http\Controllers\Web\App\Administration\MedicalCenterSettingController;
@@ -29,10 +32,11 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/', [MainController::class, 'index'])->name('app.index');
 
 Route::middleware(['permissions'])->group(function () {
-    Route::get('/registro-de-pacientes', [PatientController::class, 'index'])->name('patient.index');
+    Route::get('/registro-de-pacientes', PatientPageController::class)->name('patient.index');
     Route::post('/registro-de-pacientes', [PatientController::class, 'register'])->name('patient.register');
 
-    Route::get('/agendar-cita', [ReservationController::class, 'index'])->name('reservation.index');
+    Route::get('/paciente/{patient}/agendar-cita', ReservationPageController::class)->name('reservation.index');
+    Route::get('/agendar-cita/{reservation}/comprobante', ReservationSheetController::class)->name('reservation.sheet');
     Route::post('/agendar-cita', [ReservationController::class, 'reserve'])->name('reservation.reserve');
 });
 
